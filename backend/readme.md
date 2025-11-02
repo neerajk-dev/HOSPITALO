@@ -44,6 +44,7 @@ backend/
 │
 ├── controllers/
 │   adminControler.js
+|   aiControler.js
 │   doctorControler.js
 │   userController.js
 │
@@ -60,6 +61,7 @@ backend/
 │
 └── routes/
     adminRoute.js
+    chatbotRoute.js
     doctorRoute.js
     userRoute.js
 ```
@@ -190,6 +192,18 @@ backend/
   **Response:**  
   ```json
   { "success": true, "appointments": [ ... ] }
+  ```
+---
+
+### 🤖 Chatbot API (`/api/chatbot`)
+- `POST /ask` — Send a query to the chatbot  
+  **Request:**  
+  ```json
+  { "query": "What are the available appointment slots for Dr. Smith?" }
+  ```
+  **Response:**  
+  ```json
+  { "response": "Dr. Smith is available on Monday and Wednesday from 10:00 AM to 2:00 PM." }
   ```
 
 ---

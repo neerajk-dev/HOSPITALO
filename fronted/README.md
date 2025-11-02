@@ -25,6 +25,8 @@ This is the user-facing web application for booking doctor appointments, managin
 - 🌐 **Responsive Design**  
   Enjoy a seamless experience on desktop, tablet, and mobile devices.
 
+- 🤖 **Chatbot Integration**: AI-powered chatbot for answering user queries and assisting with appointment booking.
+
 ---
 
 ## 🛠️ Tech Stack

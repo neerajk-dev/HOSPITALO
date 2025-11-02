@@ -8,9 +8,8 @@ This documentation covers the Admin Panel, Backend API, and Frontend Panel, with
 
 ---
 
-- Live link For User:- https://hospitalo-yjlj.onrender.com/
-
-- Live link For Admin:- https://hospitalo-admin.onrender.com/doctor-appointments
+- **Live link for User**: [Hospitalo User Panel](https://hospitalo-yjlj.onrender.com/)
+- **Live link for Admin**: [Hospitalo Admin Panel](https://hospitalo-admin.onrender.com/doctor-appointments)
 
 ---
 
@@ -28,6 +27,7 @@ This documentation covers the Admin Panel, Backend API, and Frontend Panel, with
 | JWT          | ![JWT](https://img.shields.io/badge/JWT-000000?logo=jsonwebtokens&logoColor=white&style=for-the-badge) |
 | Razorpay     | ![Razorpay](https://img.shields.io/badge/Razorpay-02042B?logo=razorpay&logoColor=white&style=for-the-badge) |
 | Cloudinary   | ![Cloudinary](https://img.shields.io/badge/Cloudinary-3448C5?logo=cloudinary&logoColor=white&style=for-the-badge) |
+| DeepSeek API   | ![DeepSeek](https://img.shields.io/badge/DeepSeek-1E90FF?logo=deepl&amp;logoColor=white&amp;style=for-the-badge>) |
 
 ---
 
@@ -36,12 +36,13 @@ This documentation covers the Admin Panel, Backend API, and Frontend Panel, with
 - 👨‍⚕️ **Doctor Management**: Add, edit, and manage doctor profiles, specialities, and availability.
 - 📅 **Appointment Oversight**: View, approve, or cancel patient appointments with real-time updates.
 - 📊 **Analytics Dashboard**: Visualize key metrics: total doctors, appointments, and patients.
-- 🔒 **Secure Login**: Separate authentication for Admins and Doctors.
+- 🔒 **Secure Login**: Separate authentication for Admins, Doctors, and Users.
 - ☁️ **Image Upload**: Upload doctor profile images securely.
 - 🩺 **Browse Doctors**: Patients can find and filter doctors by speciality and availability.
 - 💳 **Online Payments**: Securely pay for appointments using integrated payment gateways.
 - 🔔 **Notifications**: Real-time updates for confirmations, reminders, and more.
 - 👤 **Profile Management**: Update personal details and manage health information.
+- 🤖 **Chatbot Integration**: AI-powered chatbot for answering user queries and assisting with appointment booking.
 
 ---
 
@@ -95,6 +96,17 @@ fronted/    # Frontend Panel (React)
   { "success": true, "appointment": { ... } }
   ```
 
+### 🤖 Chatbot API (`/api/chatbot`)
+- `POST /ask` — Send a query to the chatbot  
+  **Request:**  
+  ```json
+  { "query": "What are the available appointment slots for Dr. Smith?" }
+  ```
+  **Response:**  
+  ```json
+  { "response": "Dr. Smith is available on Monday and Wednesday from 10:00 AM to 2:00 PM." }
+  ```
+
 ---
 
 ### 👨‍⚕️ Doctor APIs (`/api/doctor`)
@@ -128,12 +140,53 @@ fronted/    # Frontend Panel (React)
 
 ---
 
+## 📝 How to Use the Chatbot
+
+1. **Backend Setup**:  
+   - Ensure the OpenAI API key is set in the `.env` file under `DEEPSEEK_API_KEY`.
+   - The chatbot logic is implemented in the backend under `controllers/chatbotController.js`.
+
+2. **Frontend Integration**:  
+   - A chatbot widget is available in the frontend under `components/Chatbot.jsx`.
+   - The widget allows users to type queries and receive responses in real-time.
+
+3. **Example Queries**:  
+   - "What are the available appointment slots for Dr. Smith?"
+   - "How can I reset my password?"
+   - "What is the consultation fee for a cardiologist?"
+
+---
+
 ## 🎨 UI Highlights
 
 - **Modern, responsive design** with TailwindCSS
 - **Colorful icons** for intuitive navigation
 - **Sidebar and navbar** for easy access to all features
 - **Real-time feedback** and notifications
+- **Chatbot widget** for real-time assistance.
+
+---
+
+## 🛠️ Environment Variables
+
+Each service uses its own `.env` file. Below are the required variables:
+
+### Backend `.env`
+- `MONGO_URI` — MongoDB connection string.
+- `JWT_SECRET` — Secret for JWT tokens.
+- `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` — Cloudinary credentials.
+- `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET` — Razorpay credentials.
+- `DEEPSEEK_API_KEY` — Deepseek API key for the chatbot.
+
+### Frontend `.env`
+- `VITE_API_BASE_URL` — Base URL for the backend API.
+
+---
+
+## 🚀 Deployment Notes
+
+- **Frontend**: Build the React apps (admin and frontend) using `npm run build` and deploy to a static hosting service like Netlify or Vercel.
+- **Backend**: Deploy the Node.js backend to a platform like Render, Heroku, or AWS. Ensure environment variables are configured correctly.
 
 ---
 

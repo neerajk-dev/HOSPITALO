@@ -3,11 +3,14 @@ import { assets } from "../assets/assets";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import { MdOutlineLogout } from "react-icons/md";
+import { ThemeContext } from "../context/ThemeContext";
+import { Moon, Sun } from "lucide-react";
 import axios from "axios";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const { token, setToken, userData, backendUrl, setUserData, setIsLoggedin } =
     useContext(AppContext);
@@ -58,6 +61,16 @@ const Navbar = () => {
 
       {/* ✅ Right Section (User / Buttons) */}
       <div className="flex items-center gap-2">
+        <div className="mr-0.5">
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:scale-110 transition-transform"
+          >
+            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+        </div>
+      
+      
         {token && userData ? (
           <button className="flex items-center gap-2 cursor-pointer group relative">
             <img className="w-8 rounded-full" src={userData.image} alt="user" />
