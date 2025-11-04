@@ -116,9 +116,9 @@ const AllApointments = () => {
           <div className="animate-spin rounded-full h-11 w-11 border-3 border-[#5f6FFF] border-t-transparent"></div>
         </div>
       ) : (
-        <div className="bg-white border border-gray-200 rounded text-sm max-h-[80vh] min-h-[60vh] overflow-y-scroll">
+        <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-400 rounded text-sm max-h-[80vh] min-h-[60vh] overflow-y-scroll">
           {/* Header */}
-          <div className="hidden sm:grid grid-cols-[0.5fr_3fr_1fr_3fr_3fr_1fr_1fr_1fr] py-3 px-6 border-b border-gray-200 gap-2 font-medium text-gray-700">
+          <div className="hidden sm:grid grid-cols-[0.5fr_3fr_1fr_3fr_3fr_1fr_1fr_1fr] py-3 px-6 border-b border-gray-200 dark:border-gray-400 gap-2 font-medium text-gray-700 dark:text-gray-300">
             <p>#</p>
             <p>Patient</p>
             <p>Age</p>
@@ -133,7 +133,7 @@ const AllApointments = () => {
           {filteredAppointments.length > 0 ? (
             filteredAppointments.map((item, index) => (
               <div
-                className="flex flex-wrap justify-between max-sm:gap-2 sm:grid sm:grid-cols-[0.5fr_3fr_1fr_3fr_3fr_1fr_1fr_1fr] items-center text-gray-500 py-3 px-6 border-b border-gray-200 hover:bg-gray-50"
+                className="flex flex-wrap justify-between max-sm:gap-2 sm:grid sm:grid-cols-[0.5fr_3fr_1fr_3fr_3fr_1fr_1fr_1fr] items-center text-gray-500 dark:text-gray-400 py-3 px-6 border-b border-gray-200 dark:border-gray-400 hover:bg-gray-50 dark:hover:bg-gray-600"
                 key={item._id || index}
               >
                 <p className="max-sm:hidden">{index + 1}</p>

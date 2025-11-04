@@ -41,7 +41,7 @@ const App = () => {
       <Route path='/my-profile' element={<MyProfile />} />
       <Route path='/my-appointments' element={<MyAppointments />} />
       <Route path='/appointment/:docId' element={<Appointment />} />
-      <Route path='/pri-policy' element={<PrivPolicy lastUpdated="October 14, 2025" />} />
+      <Route path='/pri-policy' element={<PrivPolicy lastUpdated="November 4, 2025" />} />
     </Routes>
     <Footer/>
    </div>

@@ -142,20 +142,20 @@ const PrivPolicy = ({ lastUpdated = "[Insert Date]" }) => {
 
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 md:px-8 lg:px-20">
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-md overflow-hidden">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-600/50 backdrop-blur-xl rounded-[4px]  py-8 px-4 md:px-8 lg:px-20">
+      <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-md overflow-hidden">
         <div className="p-6 md:p-10">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <h1 className="text-2xl md:text-3xl font-extrabold text-slate-800">Privacy Policy</h1>
-              <p className="text-sm text-slate-500 mt-1">Hospitalo — Smart Hospital Appointment System</p>
-              <p className="text-xs text-slate-400 mt-2">Last Updated: <span className="font-medium">{lastUpdated}</span></p>
+              <h1 className="text-2xl md:text-3xl font-extrabold text-slate-800 dark:text-slate-200">Privacy Policy</h1>
+              <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Hospitalo — Smart Hospital Appointment System</p>
+              <p className="text-xs text-slate-400 dark:text-slate-300 mt-2">Last Updated: <span className="font-medium">{lastUpdated}</span></p>
             </div>
 
             <div className="hidden md:flex flex-col items-end">
               <button
                 onClick={() => window.print()}
-                className="px-3 py-1.5 border rounded-md text-sm hover:shadow-sm"
+                className="px-3 py-1.5 border rounded-md dark:bg-gray-600/50 backdrop-blur-3xl text-sm hover:shadow-sm"
               >
                 Print
               </button>
@@ -165,7 +165,7 @@ const PrivPolicy = ({ lastUpdated = "[Insert Date]" }) => {
           <div className="mt-6 grid md:grid-cols-4 gap-6">
             {/* Sidebar / TOC */}
             <aside className="md:col-span-1 hidden md:block">
-              <nav className="sticky top-6 bg-slate-50 p-3 rounded-lg border">
+              <nav className="sticky top-6 bg-slate-50 dark:bg-slate-700 p-3 rounded-lg border">
                 <h3 className="text-sm font-semibold mb-3">On this page</h3>
                 <ul className="space-y-2 text-sm">
                   {sections.map((s) => (
@@ -183,15 +183,15 @@ const PrivPolicy = ({ lastUpdated = "[Insert Date]" }) => {
             </aside>
 
             <main className="md:col-span-3">
-              <section className="prose max-w-none text-slate-700">
+              <section className="prose max-w-none text-slate-700 dark:text-slate-400">
                 <p className="mt-2">This Privacy Policy describes how Hospitalo collects and uses your information when you use our services.</p>
               </section>
 
               <div className="mt-6 space-y-4">
                 {sections.map((s) => (
-                  <article id={s.id} key={s.id} className="bg-white border rounded-lg p-4">
+                  <article id={s.id} key={s.id} className="bg-white dark:bg-gray-900 border rounded-lg p-4">
                     <header className="flex items-center justify-between">
-                      <h2 className="text-lg font-semibold text-slate-800">{s.title}</h2>
+                      <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-200">{s.title}</h2>
                       <button
                         onClick={() => toggle(s.id)}
                         aria-expanded={openSection === s.id}
@@ -201,12 +201,12 @@ const PrivPolicy = ({ lastUpdated = "[Insert Date]" }) => {
                       </button>
                     </header>
 
-                    <div className={`mt-3 text-sm text-slate-700 ${openSection === s.id ? "block" : "hidden"}`}>
+                    <div className={`mt-3 text-sm text-slate-700 dark:text-slate-400 ${openSection === s.id ? "block" : "hidden"}`}>
                       {s.body}
                     </div>
 
                     {/* show short preview when collapsed */}
-                    <div className={`mt-3 text-sm text-slate-600 ${openSection === s.id ? "hidden" : "block"}`}>
+                    <div className={`mt-3 text-sm text-slate-600 dark:text-slate-400 ${openSection === s.id ? "hidden" : "block"}`}>
                       <p>
                         {typeof s.body === "object"
                           ? (Array.isArray(s.body.props?.children) ? s.body.props.children[0]?.props?.children : null)

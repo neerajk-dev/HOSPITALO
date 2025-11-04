@@ -57,15 +57,15 @@ const Footer = () => {
         {/* Left: Logo and Description */}
         <div>
           <img className="mb-5 w-40" src={assets.logon} alt="logo" />
-          <p className="w-full md:w-2/3 text-gray-600 leading-6">
+          <p className="w-full md:w-2/3 text-gray-600 dark:text-gray-400 leading-6">
             Hospitalo is your trusted platform for managing prescriptions and healthcare needs online.
           </p>
         </div>
 
         {/* Center: Navigation Links */}
         <div>
-          <p className="text-xl font-medium mb-5">COMPANY</p>
-          <ul className="flex flex-col gap-2 text-gray-600">
+          <p className="text-xl font-medium dark:text-gray-200 mb-5">COMPANY</p>
+          <ul className="flex flex-col gap-2 text-gray-600 dark:text-gray-400">
             <li className="cursor-pointer" onClick={() => { navigate("/"); scrollTo(0,0); }}>Home</li>
             <li className="cursor-pointer" onClick={() => { navigate("/about"); scrollTo(0,0); }}>About us</li>
             <li className="cursor-pointer" onClick={() => { navigate("/contact"); scrollTo(0,0); }}>Contact us</li>
@@ -75,8 +75,8 @@ const Footer = () => {
 
         {/* Right: Contact + Feedback */}
         <div>
-          <p className="text-xl font-medium mb-5">GET IN TOUCH</p>
-          <ul className="flex flex-col gap-2 text-gray-600 mb-4">
+          <p className="text-xl font-medium dark:text-gray-200 mb-5">GET IN TOUCH</p>
+          <ul className="flex flex-col gap-2 text-gray-600 dark:text-gray-400 mb-4">
             <li>+7277959834</li>
             <li><a className="underline" href="mailto:neerajkr145518@gmail.com">neerajkr145518@gmail.com</a></li>
           </ul>
@@ -89,7 +89,7 @@ const Footer = () => {
           </button>
 
           {showFeedback && (
-            <form onSubmit={submitFeedback} className="mt-4 p-3 bg-white border rounded shadow-sm text-sm">
+            <form onSubmit={submitFeedback} className="mt-4 p-3 bg-white dark:bg-[#4a4c52]/50 backdrop-blur-lg border rounded shadow-sm text-sm">
               {!token && (
                 <>
                   <input
@@ -109,7 +109,7 @@ const Footer = () => {
                 </>
               )}
               <textarea
-                className="w-full mb-2 p-2 border rounded"
+                className="w-full mb-2 p-2 border rounded dark:bg-[#0f172a]/50  backdrop-blur-lg"
                 rows="4"
                 placeholder="Write your feedback..."
                 value={fbMessage}

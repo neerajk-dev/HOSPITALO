@@ -160,7 +160,7 @@ const Appointment = () => {
             />
           </div>
 
-          <div className="flex-1 border border-gray-400 rounded-lg p-8 py-7 bg-white mx-2 sm:mx-0 mt-[-80px] sm:mt-0">
+          <div className="flex-1 border border-gray-400 rounded-lg p-8 py-7 bg-white dark:bg-gray-800 mx-2 sm:mx-0 mt-[-80px] sm:mt-0">
             {/* --------- Doc Info : name, degree, experience -------- */}
             <p className="flex items-center gap-2 text-2xl font-medium to-gray-900">
               {docInfo.name}
@@ -177,16 +177,16 @@ const Appointment = () => {
 
             {/* -------- Doctor About -------- */}
             <div>
-              <p className="flex items-center gap-1 text-sm font-medium text-gray-900 mt-3">
+              <p className="flex items-center gap-1 text-sm font-medium text-gray-900 dark:text-gray-300 mt-3">
                 About <img src={assets.info_icon} alt="" />
               </p>
-              <p className="text-sm text-gray-500 max-w-[700px] mt-1">
+              <p className="text-sm text-gray-500 dark:text-gray-400 max-w-[700px] mt-1">
                 {docInfo.about}
               </p>
             </div>
-            <p className="text-gray-500 font-medium mt-4">
+            <p className="text-gray-500 dark:text-gray-400 font-medium mt-4">
               Appointment fee:{" "}
-              <span className="text-gray-600">
+              <span className="text-gray-600 dark:text-gray-100">
                 {currencySymbol}
                 {docInfo.fees}
               </span>
@@ -195,7 +195,7 @@ const Appointment = () => {
         </div>
 
         {/* ------ Booking slots ------ */}
-        <div className="sm:ml-72 sm:pl-4 mt-4 font-medium text-gray-700">
+        <div className="sm:ml-72 sm:pl-4 mt-4 font-medium text-gray-700 dark:text-gray-300">
           <p>Booking slots</p>
           <div className="flex gap-3 items-center w-full overflow-x-scroll mt-4">
             {docSlots.length &&
@@ -223,7 +223,7 @@ const Appointment = () => {
                   className={`text-sm font-light flex-shrink-0 px-5 py-2 rounded-full cursor-pointer ${
                     item.time === slotTime
                       ? "bg-[#5f6FFF] text-white"
-                      : "text-gray-400 border border-gray-300"
+                      : "text-gray-400 dark:text-gray-300 border border-gray-300"
                   }`}
                   key={index}
                 >

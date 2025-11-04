@@ -1,20 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Poppins:wght@300;400;500;600&display=swap");
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+
 * {
   font-family: Outfit;
 }
 
 /* 🌈 Default Colors */
 :root {
-  --primary-color: #5f6fff;
+  --color-primary: #5f6fff;
   --bg-color: #ffffff;
   --text-color: #000000;
 }
 
 /* 🌙 Dark Mode Colors */
 .dark {
-  --primary-color: #5f6fff;
+  --color-primary: #5f6fff;
   --bg-color: #0f172a;
   --text-color: #ffffff;
 }

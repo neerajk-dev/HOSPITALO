@@ -61,8 +61,8 @@ const Login = () => {
   }, [token]);
 
   return (
-    <form onSubmit={onSubmitHandler} className="min-h-[80vh] flex items-center">
-      <div className=" flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 border rounded-xl text-zinc-600 text-sm shadow-lg">
+    <form onSubmit={onSubmitHandler} className="min-h-[80vh] flex items-center ">
+      <div className=" flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 border rounded-xl text-zinc-600 dark:text-zinc-300  text-sm shadow-lg">
         <h2 className="w-full text-3xl font-semibold text-center mb-3">
           {state === "Sign Up" ? "Create Account" : "Login"}
         </h2>
@@ -72,7 +72,7 @@ const Login = () => {
         </p>
 
         {state === "Sign Up" && (
-          <div className="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded border border-zinc-300 hover:border-zinc-900">
+          <div className="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded border border-zinc-300 hover:border-zinc-900 dark:hover:border-zinc-500">
             <img src={assets.person_icon} alt="" />
             <input
               onChange={(e) => setName(e.target.value)}
@@ -85,19 +85,19 @@ const Login = () => {
           </div>
         )}
 
-        <div className="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded border border-zinc-300 hover:border-zinc-900">
+        <div className="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded border border-zinc-300 hover:border-zinc-900 dark:hover:border-zinc-500">
           <img src={assets.mail_icon} alt="" />
           <input
             onChange={(e) => setEmail(e.target.value)}
             value={email}
-            className="bg-transparent outline-none"
+            className="bg-transparent outline-none "
             type="email"
             placeholder="Email id"
             required
           />
         </div>
 
-        <div className="flex items-center gap-3 w-full px-5 py-2.5 rounded border border-zinc-300 hover:border-zinc-900">
+        <div className="flex items-center gap-3 w-full px-5 py-2.5 rounded border border-zinc-300 hover:border-zinc-900 dark:hover:border-zinc-500">
           <img src={assets.lock_icon} alt="lock" />
 
           <input
@@ -112,7 +112,7 @@ const Login = () => {
           <button
             type="button"
             onClick={() => setShowPassword((prev) => !prev)}
-            className="text-xl text-zinc-500 hover:text-zinc-800 focus:outline-none"
+            className="text-xl text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 focus:outline-none"
           >
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </button>

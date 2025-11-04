@@ -1,6 +1,6 @@
 import add_icon from './add_icon.svg'
 import admin_logo from './admin_logo.svg'
-import logon from './logon.webp'
+import logon from './logon.png'
 import appointment_icon from './appointment_icon.svg'
 import cancel_icon from './cancel_icon.svg'
 import doctor_icon from './doctor_icon.svg'

@@ -15,7 +15,7 @@ const TopDoctors = () => {
   }, [doctors]);
 
   return (
-    <div className="flex flex-col items-center gap-4 my-16 text-gray-900 md:mx-10">
+    <div className="flex flex-col items-center gap-4 my-16 text-gray-900 dark:text-gray-300 md:mx-10">
       <h1 className="text-3xl font-medium">Top Doctors to Book</h1>
       <p className="sm:w-1/3 text-center text-sm">
         Simply browse through our extensive list of trusted doctors.
@@ -64,8 +64,8 @@ const TopDoctors = () => {
                     ></p>
                     <p>{item.available ? "Available" : "Unavailable"}</p>
                   </div>
-                  <p className="text-gray-900 text-lg font-medium">{item.name}</p>
-                  <p className="text-gray-600 text-sm">{item.speciality}</p>
+                  <p className="text-gray-900 dark:text-gray-100 text-lg font-medium">{item.name}</p>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">{item.speciality}</p>
                 </div>
               </div>
             ))

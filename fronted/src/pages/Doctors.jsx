@@ -32,7 +32,7 @@ const Doctors = () => {
 
   return (
     <div>
-      <p className="text-gray-600">Browse through the doctors specialist.</p>
+      <p className="text-gray-600 dark:text-gray-200">Browse through the doctors specialist.</p>
       <div className="flex flex-col sm:flex-row items-start gap-5 mt-5">
         <button
           className={`py-1 px-3 border rounded text-sm transition-all sm:hidden ${
@@ -43,7 +43,7 @@ const Doctors = () => {
           Filters
         </button>
         <div
-          className={` flex-col gap-4 text-sm text-gray-600 ${
+          className={` flex-col gap-4 text-sm text-gray-600 dark:text-gray-400 ${
             showFilter ? "flex" : "hidden sm:flex"
           }`}
         >
@@ -53,7 +53,7 @@ const Doctors = () => {
                 ? navigate("/doctors")
                 : navigate("/doctors/General physician")
             }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
+            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 dark:border-gray-200 rounded transition-all cursor-pointer ${
               speciality === "General physician"
                 ? "bg-indigo-100 text-black"
                 : ""
@@ -67,7 +67,7 @@ const Doctors = () => {
                 ? navigate("/doctors")
                 : navigate("/doctors/Gynecologist")
             }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
+            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 dark:border-gray-200 rounded transition-all cursor-pointer ${
               speciality === "Gynecologist" ? "bg-indigo-100 text-black" : ""
             }`}
           >
@@ -79,7 +79,7 @@ const Doctors = () => {
                 ? navigate("/doctors")
                 : navigate("/doctors/Dermatologist")
             }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
+            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 dark:border-gray-200 rounded transition-all cursor-pointer ${
               speciality === "Dermatologist" ? "bg-indigo-100 text-black" : ""
             }`}
           >
@@ -91,7 +91,7 @@ const Doctors = () => {
                 ? navigate("/doctors")
                 : navigate("/doctors/Pediatricians")
             }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
+            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 dark:border-gray-200 rounded transition-all cursor-pointer ${
               speciality === "Pediatricians" ? "bg-indigo-100 text-black" : ""
             }`}
           >
@@ -103,7 +103,7 @@ const Doctors = () => {
                 ? navigate("/doctors")
                 : navigate("/doctors/Neurologist")
             }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
+            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 dark:border-gray-200 rounded transition-all cursor-pointer ${
               speciality === "Neurologist" ? "bg-indigo-100 text-black" : ""
             }`}
           >
@@ -115,7 +115,7 @@ const Doctors = () => {
                 ? navigate("/doctors")
                 : navigate("/doctors/Gastroenterologist")
             }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
+            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 dark:border-gray-200 rounded transition-all cursor-pointer ${
               speciality === "Gastroenterologist"
                 ? "bg-indigo-100 text-black"
                 : ""
@@ -167,9 +167,9 @@ const Doctors = () => {
                   <p>{item.available ? "Available" : "Unavailable"}</p>
                 </div>
                 {/* Doctor's name */}
-                <p className="text-gray-900 text-lg font-medium">{item.name}</p>
+                <p className="text-gray-900 dark:text-gray-200 text-lg font-medium">{item.name}</p>
                 {/* Doctor's speciality */}
-                <p className="text-gray-600 text-sm">{item.speciality}</p>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">{item.speciality}</p>
               </div>
             </div>
           ))}

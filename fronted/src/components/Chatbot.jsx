@@ -72,16 +72,16 @@ const Chatbot = () => {
 
       {/* 🧠 Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-20 right-5 bg-white shadow-2xl rounded-2xl w-80 sm:w-96 border border-gray-200 flex flex-col overflow-hidden animate-fadeIn z-50 max-h-[75vh]">
+        <div className="fixed bottom-20 right-5 bg-white dark:bg-[#0f172a]/50 backdrop-blur-sm shadow-2xl rounded-2xl w-80 sm:w-96 border border-gray-200 dark:border-gray-800 flex flex-col overflow-hidden animate-fadeIn z-50 max-h-[75vh]">
           {/* Header */}
-          <div className="bg-[var(--primary-color)] text-white text-center p-3 font-semibold text-lg">
+          <div className="bg-[var(--color-primary)] text-white text-center p-3 font-semibold text-lg">
             Hospitalo ChatBot 🤖
           </div>
 
           {/* Chat Messages */}
-          <div className="flex-1 overflow-y-auto p-3 bg-gray-50 scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-gray-100">
+          <div className="flex-1 overflow-y-auto p-3 bg-gray-50 dark:bg-[#0f172a]/50 backdrop-blur-xl scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-gray-100">
             {messages.length === 0 && (
-              <div className="text-gray-400 text-center mt-6 text-sm">
+              <div className="text-gray-400 dark:text-gray-300 text-center mt-6 text-sm">
                 👋 Hi! Ask me anything about Hospitalo.
               </div>
             )}
@@ -112,7 +112,7 @@ const Chatbot = () => {
                   className={`max-w-[75%] p-2 rounded-2xl text-sm leading-relaxed shadow-sm ${
                     msg.sender === "user"
                       ? "bg-blue-100 text-right text-gray-800"
-                      : "bg-white text-left text-gray-800"
+                      : "bg-white dark:bg-gray-600 text-left text-gray-800 dark:text-gray-200"
                   }`}
                 >
                   <div className="reset-tw">
@@ -131,10 +131,10 @@ const Chatbot = () => {
           </div>
 
           {/* Input Area */}
-          <div className="flex items-center border-t bg-gray-100">
+          <div className="flex items-center border-t bg-gray-100 dark:bg-gray-400/50 backdrop-blur-sm">
             <input
               type="text"
-              className="flex-1 p-2 outline-none bg-transparent text-sm"
+              className="flex-1 p-2 outline-none bg-transparent text-sm font-medium dark:text-black"
               placeholder="Type a message..."
               value={input}
               onChange={(e) => setInput(e.target.value)}

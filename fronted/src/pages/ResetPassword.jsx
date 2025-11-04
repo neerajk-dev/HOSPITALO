@@ -153,7 +153,7 @@ const ResetPassword = () => {
 
       {/* Step 1: Email Form */}
       {step === "email" && (
-        <form onSubmit={onSubmitEmail} className='p-8 rounded-lg shadow-lg w-96 text-sm border text-zinc-600'>
+        <form onSubmit={onSubmitEmail} className='p-8 rounded-lg shadow-lg w-96 text-sm border text-zinc-600 dark:text-zinc-300'>
           <h1 className='text-2xl font-semibold text-center mb-4'>Reset password</h1>
           <p className='text-center mb-6'>Enter your registered email address</p>
           <div className='mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded border'>
@@ -161,7 +161,7 @@ const ResetPassword = () => {
             <input
               type="email"
               placeholder='Email id'
-              className='bg-transparent outline-none text-zinc-600 text-lg flex-1'
+              className='bg-transparent outline-none text-zinc-600 dark:text-zinc-300 text-lg flex-1'
               value={email}
               onChange={e => setEmail(e.target.value)}
               required
@@ -175,7 +175,7 @@ const ResetPassword = () => {
 
       {/* Step 2: OTP Form */}
       {step === "otp" && (
-        <form onSubmit={onSubmitOTP} className='p-8 rounded-lg shadow-lg w-96 text-sm border text-zinc-600'>
+        <form onSubmit={onSubmitOTP} className='p-8 rounded-lg shadow-lg w-96 text-sm border text-zinc-600 dark:text-zinc-300'>
           <h1 className='text-2xl font-semibold text-center mb-4'>Enter OTP</h1>
           <p className='text-center mb-6'>Enter the 6-digit code sent to your email</p>
           <div className='flex gap-1 justify-between mb-8 gap-x-2' onPaste={handlePaste}>
@@ -185,7 +185,7 @@ const ResetPassword = () => {
                 maxLength="1"
                 key={index}
                 required
-                className='w-12 h-12 bg-gray-100 text-black text-center text-xl rounded-md'
+                className='w-12 h-12 bg-gray-100 text-black dark:bg-gray-700 dark:text-white  text-center text-xl rounded-md'
                 ref={el => inputRefs.current[index] = el}
                 onInput={(e) => handleInput(e, index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
@@ -200,7 +200,7 @@ const ResetPassword = () => {
 
       {/* Step 3: New Password */}
       {step === "new-password" && (
-        <form onSubmit={onSubmitNewPassword} className='p-8 rounded-lg shadow-lg w-96 text-sm border text-zinc-600'>
+        <form onSubmit={onSubmitNewPassword} className='p-8 rounded-lg shadow-lg w-96 text-sm border text-zinc-600 dark:text-zinc-300'>
           <h1 className='text-2xl font-semibold text-center mb-4'>New password</h1>
           <p className='text-center mb-6'>Enter the new password below</p>
           <div className='mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded border relative'>
@@ -208,7 +208,7 @@ const ResetPassword = () => {
             <input
               type={showPassword ? 'text' : 'password'}
               placeholder='New password'
-              className='bg-transparent outline-none text-zinc-600 flex-1 text-lg'
+              className='bg-transparent outline-none text-zinc-600 dark:text-zinc-300 flex-1 text-lg'
               value={newPassword}
               onChange={e => setNewPassword(e.target.value)}
               required

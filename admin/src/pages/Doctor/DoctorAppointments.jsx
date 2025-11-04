@@ -72,8 +72,8 @@ const DoctorAppointments = () => {
     <div className="w-full max-w-6xl m-5">
       <p className="mb-3 text-lg font-medium">All Appointments</p>
 
-      <div className="bg-white border border-gray-200 rounded text-sm max-h-[80vh] min-h-[50vh] overflow-y-scroll">
-        <div className="max-sm:hidden grid grid-cols-[0.5fr_2fr_1fr_1fr_3fr_1fr_1fr] gap-1 py-3 px-6 border-b border-gray-200">
+      <div className="bg-white dark:bg-[#0f172a] border border-gray-200 dark:border-gray-400 rounded text-sm max-h-[80vh] min-h-[50vh] overflow-y-scroll">
+        <div className="max-sm:hidden grid grid-cols-[0.5fr_2fr_1fr_1fr_3fr_1fr_1fr] gap-1 py-3 px-6 border-b border-gray-200 dark:border-gray-400">
           <p>#</p>
           <p>Patient</p>
           <p>Payment</p>
@@ -84,11 +84,11 @@ const DoctorAppointments = () => {
         </div>
 
         {list.length === 0 ? (
-          <p className="text-center py-10 text-gray-500">No appointments found.</p>
+          <p className="text-center py-10 text-gray-500 dark:text-gray-300">No appointments found.</p>
         ) : (
           list.map((item, index) => (
             <div
-              className="flex flex-wrap justify-between max-sm:gap-5 max-sm:text-base sm:grid grid-cols-[0.5fr_2fr_1fr_1fr_3fr_1fr_1fr] gap-1 items-center text-gray-500 py-3 px-6 border-b border-gray-200 hover:bg-gray-50"
+              className="flex flex-wrap justify-between max-sm:gap-5 max-sm:text-base sm:grid grid-cols-[0.5fr_2fr_1fr_1fr_3fr_1fr_1fr] gap-1 items-center text-gray-500  dark:text-gray-400 py-3 px-6 border-b border-gray-200 dark:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-600"
               key={item._id || index}
             >
               <p className="max-sm:hidden">{index + 1}</p>
@@ -109,9 +109,9 @@ const DoctorAppointments = () => {
                 {currency} {item.amount}
               </p>
               {item.cancelled ? (
-                <p className="text-red-400 text-xs font-medium">Cancelled</p>
+                <p className="text-red-400 dark:text-red-600 text-xs font-medium">Cancelled</p>
               ) : item.isCompleted ? (
-                <p className="text-green-400 text-xs font-medium">Completed</p>
+                <p className="text-green-400 dark:text-green-600 text-xs font-medium">Completed</p>
               ) : (
                 <div className="flex">
                   <img

@@ -72,7 +72,7 @@ const MyProfile = () => {
 
       {isEdit ? (
         <input
-          className="bg-gray-50 text-3xl font-medium max-w-60"
+          className="bg-gray-50 dark:bg-gray-500 text-3xl font-medium max-w-60"
           type="text"
           onChange={(e) =>
             setUserData((prev) => ({ ...prev, name: e.target.value }))
@@ -80,7 +80,7 @@ const MyProfile = () => {
           value={userData.name}
         />
       ) : (
-        <p className="font-medium text-3xl text-[#262626] mt-4">
+        <p className="font-medium text-3xl text-[#262626] dark:text-stone-300  mt-4">
           {userData.name}
         </p>
       )}
@@ -89,15 +89,15 @@ const MyProfile = () => {
 
       {/* Contact Information Section */}
       <div>
-        <p className="text-gray-600 underline mt-3">CONTACT INFORMATION</p>
-        <div className="grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-[#363636]">
+        <p className="text-gray-600 dark:text-gray-300 underline mt-3">CONTACT INFORMATION</p>
+        <div className="grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-[#363636] dark:text-[#938f8f]">
           <p className="font-medium">Email id:</p>
           <p className="text-blue-500">{userData.email}</p>
 
           <p className="font-medium">Phone:</p>
           {isEdit ? (
             <input
-              className="bg-gray-50 max-w-52"
+              className="bg-gray-50 dark:bg-gray-800 max-w-52"
               type="text"
               onChange={(e) =>
                 setUserData((prev) => ({ ...prev, phone: e.target.value }))
@@ -112,7 +112,7 @@ const MyProfile = () => {
           {isEdit ? (
             <p>
               <input
-                className="bg-gray-50"
+                className="bg-gray-50 dark:bg-gray-800"
                 type="text"
                 onChange={(e) =>
                   setUserData((prev) => ({
@@ -124,7 +124,7 @@ const MyProfile = () => {
               />
               <br />
               <input
-                className="bg-gray-50"
+                className="bg-gray-50 dark:bg-gray-800"
                 type="text"
                 onChange={(e) =>
                   setUserData((prev) => ({
@@ -145,12 +145,12 @@ const MyProfile = () => {
 
       {/* Basic Information Section */}
       <div>
-        <p className="text-[#797979] underline mt-3">BASIC INFORMATION</p>
-        <div className="grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-gray-600">
+        <p className="text-[#797979] dark:text-[#c5c1c1] underline mt-3">BASIC INFORMATION</p>
+        <div className="grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-gray-600 dark:text-gray-400">
           <p className="font-medium">Gender:</p>
           {isEdit ? (
             <select
-              className="max-w-20 bg-gray-50"
+              className="max-w-20 bg-gray-50 dark:bg-gray-800"
               onChange={(e) =>
                 setUserData((prev) => ({ ...prev, gender: e.target.value }))
               }
@@ -161,13 +161,13 @@ const MyProfile = () => {
               <option value="Female">Female</option>
             </select>
           ) : (
-            <p className="text-gray-500">{userData.gender}</p>
+            <p className="text-gray-500 dark:text-gray-300">{userData.gender}</p>
           )}
 
           <p className="font-medium">Birthday:</p>
           {isEdit ? (
             <input
-              className="max-w-28 bg-gray-50"
+              className="max-w-28 bg-gray-50 dark:bg-gray-800"
               type="date"
               onChange={(e) =>
                 setUserData((prev) => ({ ...prev, dob: e.target.value }))
@@ -175,7 +175,7 @@ const MyProfile = () => {
               value={userData.dob}
             />
           ) : (
-            <p className="text-gray-500">{userData.dob}</p>
+            <p className="text-gray-500 dark:text-gray-300">{userData.dob}</p>
           )}
         </div>
       </div>

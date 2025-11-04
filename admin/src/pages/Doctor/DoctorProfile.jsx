@@ -99,11 +99,11 @@ const DoctorProfile = () => {
               alt=""
             />
           </div>
-          <div className="flex-1 border border-stone-100 rounded-lg p-8 py-7 bg-white">
-            <p className="flex items-center gap-2 text-3xl font-medium text-gray-700">
+          <div className="flex-1 border border-stone-100 rounded-lg p-8 py-7 bg-white dark:bg-gray-900">
+            <p className="flex items-center gap-2 text-3xl font-medium text-gray-700 dark:text-gray-200">
               {safeProfile.name}
             </p>
-            <div className="flex items-center gap-2 mt-1 text-gray-600">
+            <div className="flex items-center gap-2 mt-1 text-gray-600 dark:text-gray-300">
               <p>
                 {safeProfile.degree} - {safeProfile.speciality}
               </p>
@@ -114,11 +114,11 @@ const DoctorProfile = () => {
 
             <div>
               <p className="flex items-center gap-1 text-sm font-medium mt-2">
-                <span className="text-gray-800">Email:</span>
-                <span className="text-gray-600">
+                <span className="text-gray-800 dark:text-gray-500">Email:</span>
+                <span className="text-gray-600 dark:text-zinc-200">
                   {isEdit ? (
                     <input
-                      className="bg-gray-100 px-2 py-1 rounded"
+                      className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded"
                       type="email"
                       onChange={(e) =>
                         setProfileData((prev) => ({
@@ -136,19 +136,19 @@ const DoctorProfile = () => {
             </div>
 
             <div>
-              <p className="flex items-center gap-1 text-sm font-medium text-neutral-800 mt-3">
+              <p className="flex items-center gap-1 text-sm font-medium text-neutral-800 dark:text-neutral-200 mt-3">
                 About:
               </p>
-              <p className="text-sm text-gray-600 max-w-[700px] mt-1">{safeProfile.about}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 max-w-[700px] mt-1">{safeProfile.about}</p>
             </div>
 
-            <p className="text-gray-600 font-medium mt-4">
+            <p className="text-gray-600 dark:text-zinc-300 font-medium mt-4">
               Appointment fee:{" "}
-              <span className="text-gray-800">
+              <span className="text-gray-800 dark:text-gray-100">
                 {currency}{" "}
                 {isEdit ? (
                   <input
-                    className="bg-gray-100 px-2 py-1 rounded"
+                    className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded"
                     type="number"
                     onChange={(e) =>
                       setProfileData((prev) => ({
@@ -166,11 +166,11 @@ const DoctorProfile = () => {
 
             <div className="flex gap-2 py-2">
               <p>Address:</p>
-              <p className="text-sm">
+              <p className="text-sm dark:text-gray-400">
                 {isEdit ? (
                   <>
                     <input
-                      className="bg-gray-100 px-2 py-1 rounded mb-1 block"
+                      className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded mb-1 block"
                       type="text"
                       onChange={(e) =>
                         setProfileData((prev) => ({
@@ -181,7 +181,7 @@ const DoctorProfile = () => {
                       value={safeProfile.address.line1}
                     />
                     <input
-                      className="bg-gray-100 px-2 py-1 rounded block"
+                      className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded block"
                       type="text"
                       onChange={(e) =>
                         setProfileData((prev) => ({

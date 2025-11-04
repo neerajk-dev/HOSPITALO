@@ -56,27 +56,27 @@ const Login = () => {
 
   return (
     <form onSubmit={onSubmitHandler} className="min-h-[80vh] flex items-center">
-      <div className="flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 border rounded-xl text-[#5E5E5E] text-sm shadow-lg">
+      <div className="flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 border rounded-xl text-[#5E5E5E] dark:text-gray-400 text-sm shadow-lg">
         <p className="text-2xl font-semibold m-auto">
           <span className="text-[#5f6FFF]"> {state} </span> Login
         </p>
-        <div className="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded border border-zinc-300 hover:border-zinc-900">
+        <div className="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded border border-zinc-300 hover:border-zinc-900 dark:hover:border-zinc-500">
           <img src={assets.mail_icon} alt="" />
           <input
             onChange={(e) => setEmail(e.target.value)}
             value={email}
-            className="bg-transparent outline-none"
+            className="bg-transparent outline-none dark:text-gray-300"
             type="email"
             placeholder="Email id"
             required
           />
         </div>
-        <div className="flex items-center gap-3 w-full px-5 py-2.5 rounded border border-zinc-300 hover:border-zinc-900">
+        <div className="flex items-center gap-3 w-full px-5 py-2.5 rounded border border-zinc-300 hover:border-zinc-900 dark:hover:border-zinc-500">
           <img src={assets.lock_icon} alt="lock" />
           <input
             onChange={(e) => setPassword(e.target.value)}
             value={password}
-            className="outline-none flex-1"
+            className="outline-none flex-1 dark:text-gray-300"
             type={showPassword ? "text" : "password"}
             placeholder="Password"
             required
@@ -84,7 +84,7 @@ const Login = () => {
           <button
             type="button"
             onClick={() => setShowPassword((prev) => !prev)}
-            className="text-xl text-zinc-500 hover:text-zinc-800 focus:outline-none"
+            className="text-xl text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 focus:outline-none"
           >
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </button>

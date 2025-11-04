@@ -27,10 +27,10 @@ const UserList = () => {
               <div className='border border-[#C9D8FF] rounded-xl max-w-56 overflow-hidden cursor-pointer group' key={index}>
                 <img className='bg-[#EAEFFF] group-hover:bg-primary transition-all duration-500' src={item.image} alt="" />
                 <div className='p-4'>
-                  <p className='text-[#262626] text-lg font-medium'>{item.name}</p>
-                  <p className='text-[#5C5C5C] text-sm'>{item.gender}</p>
-                  <p className='text-[#5C5C5C] text-sm'>{item.dob}</p>
-                  <p className='text-[#5C5C5C] text-sm'>{item.address.line1 || "No address"} <br /> {item.address.line2 || "No address"}</p>
+                  <p className='text-[#262626] dark:text-neutral-200 text-lg font-medium'>{item.name}</p>
+                  <p className='text-[#5C5C5C] dark:text-gray-300 text-sm'>{item.gender}</p>
+                  <p className='text-[#5C5C5C] dark:text-gray-400 text-sm'>{item.dob}</p>
+                  <p className='text-[#5C5C5C] dark:text-zinc-500 text-sm'>{item.address.line1 || "No address"} <br /> {item.address.line2 || "No address"}</p>
 
                 </div>
               </div>

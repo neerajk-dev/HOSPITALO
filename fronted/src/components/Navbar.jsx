@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import { MdOutlineLogout } from "react-icons/md";
 import { ThemeContext } from "../context/ThemeContext";
-import { Moon, Sun } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import axios from "axios";
 
 const Navbar = () => {
@@ -73,10 +73,10 @@ const Navbar = () => {
       
         {token && userData ? (
           <button className="flex items-center gap-2 cursor-pointer group relative">
-            <img className="w-8 rounded-full" src={userData.image} alt="user" />
-            <img className="w-2.5 hidden md:block" src={assets.dropdown_icon} alt="dropdown" />
-            <div className="absolute top-0 right-0 pt-14 text-base font-medium text-gray-600 z-20 hidden group-hover:block">
-              <div className="min-w-48 bg-gray-50 rounded flex flex-col gap-4 p-4 shadow-md">
+            <img className="w-8 rounded-full hidden md:block" src={userData.image} alt="user" />
+            <img className="w-2.5 hidden md:block " src={assets.dropdown_icon} alt="dropdown" />
+            <div className="absolute top-0 right-0 pt-14 text-base font-medium text-gray-600  dark:text-gray-400 z-20 hidden group-hover:block">
+              <div className="min-w-48 bg-gray-50 dark:bg-gray-800  rounded flex flex-col gap-4 p-4 shadow-md">
                 <p
                   onClick={() => navigate("/my-profile")}
                   className="hover:text-black cursor-pointer"
@@ -106,27 +106,17 @@ const Navbar = () => {
         </div>
 
         {/* ✅ Mobile Menu Toggle */}
-        <img
-          onClick={() => setShowMenu(true)}
-          className="w-6 md:hidden cursor-pointer"
-          src={assets.menu_icon}
-          alt="menu"
-        />
+         <Menu  onClick={() => setShowMenu(true)} className="w-9 h-9 md:hidden cursor-pointer text-blue-600 " />
 
         {/* ✅ Mobile Menu Drawer */}
         <div
           className={`md:hidden ${
             showMenu ? "fixed w-full" : "h-0 w-0"
-          } right-0 top-0 bottom-0 z-20 overflow-hidden bg-white transition-all`}
+          } right-0 top-0 bottom-0 z-60 overflow-hidden bg-white dark:bg-[#0f172a]/50 backdrop-blur-xl transition-all`}
         >
           <div className="flex items-center justify-between px-5 py-6">
             <img src={assets.logon} className="w-36" alt="logo" />
-            <img
-              onClick={() => setShowMenu(false)}
-              src={assets.cross_icon}
-              className="w-7 cursor-pointer"
-              alt="close"
-            />
+            <X onClick={() => setShowMenu(false)} className="w-9 h-9 cursor-pointer text-blue-600"/>
           </div>
 
           {/* ✅ Mobile Nav Links */}
@@ -142,7 +132,7 @@ const Navbar = () => {
                     `w-fit px-2 text-center py-2 rounded-lg transition-all duration-300 ${
                       isActive
                         ? "text-blue-600 border border-blue-500 bg-blue-50"
-                        : "text-gray-700 hover:text-blue-600 hover:border-blue-300 border border-transparent"
+                        : "text-gray-700 dark:text-gray-400 hover:text-blue-600 hover:border-blue-300 border border-transparent"
                     }`
                   }
                 >
@@ -161,7 +151,7 @@ const Navbar = () => {
                     `w-fit px-2 text-center py-2 rounded-lg transition-all duration-300 ${
                       isActive
                         ? "text-blue-600 border border-blue-500 bg-blue-50"
-                        : "text-gray-700 hover:text-blue-600 hover:border-blue-300 border border-transparent"
+                        : "text-gray-700 dark:text-gray-400 hover:text-blue-600 hover:border-blue-300 border border-transparent"
                     }`
                   }
                 >
@@ -175,7 +165,7 @@ const Navbar = () => {
                     `w-fit px-2  text-center py-2 rounded-lg transition-all duration-300 ${
                       isActive
                         ? "text-blue-600 border border-blue-500 bg-blue-50"
-                        : "text-gray-700 hover:text-blue-600 hover:border-blue-300 border border-transparent"
+                        : "text-gray-700 dark:text-gray-400 hover:text-blue-600 hover:border-blue-300 border border-transparent"
                     }`
                   }
                 >

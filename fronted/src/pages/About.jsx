@@ -5,9 +5,9 @@ const About = () => {
   return (
     <div>
       {/* Heading: About Us */}
-      <div className="text-center text-2xl pt-10 text-gray-500">
+      <div className="text-center text-2xl pt-10 text-gray-500 dark:text-gray-300">
         <p>
-          ABOUT <span className="text-gray-700 font-medium">US</span>
+          ABOUT <span className="text-gray-700 dark:text-gray-500 font-medium">US</span>
         </p>
       </div>
 
@@ -18,7 +18,7 @@ const About = () => {
           src={assets.about_image}
           alt=""
         />
-        <div className="flex flex-col justify-center gap-6 md:w-2/4 text-sm text-gray-600">
+        <div className="flex flex-col justify-center gap-6 md:w-2/4 text-sm text-gray-600 dark:text-gray-400">
           <p>
             Welcome To hospitalo, Your Trusted Partner In Managing Your
             Healthcare Needs Conveniently And Efficiently Af hospitalo, We
@@ -33,7 +33,7 @@ const About = () => {
             Ongoing Care, hospitalo Is Here To Support You Every Step Of The
             Way.
           </p>
-          <b className="text-gray-800">Our Vision</b>
+          <b className="text-gray-800 dark:text-gray-300">Our Vision</b>
           <p>
             Our Vision At hospitalo is To Create A Seamless Healthcare
             Experience For Every User. We Aim To Bridge The Gap Between Patients
@@ -46,13 +46,13 @@ const About = () => {
       {/* Heading: Why Choose Us */}
       <div className="text-xl my-4">
         <p>
-          WHY <span className="text-gray-700 font-semibold">CHOOSE US</span>
+          WHY <span className="text-gray-700 dark:text-gray-500 font-semibold">CHOOSE US</span>
         </p>
       </div>
 
       {/* Feature Cards */}
       <div className="flex flex-col md:flex-row mb-20 gap-2">
-        <div className="border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 rounded-lg text-[15px] hover:bg-[#5f6FFF] hover:text-white transition-all duration-300 text-gray-600 cursor-pointer">
+        <div className="border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 rounded-lg text-[15px] hover:bg-[#5f6FFF] hover:text-white transition-all duration-300 text-gray-600 dark:text-gray-400 cursor-pointer">
           <b>Efficiency</b>
           <p>
             Streamlined appointment scheduling that fits into your busy
@@ -60,7 +60,7 @@ const About = () => {
           </p>
         </div>
 
-        <div className="border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 rounded-lg  text-[15px] hover:bg-[#5f6FFF] hover:text-white transition-all duration-300 text-gray-600 cursor-pointer">
+        <div className="border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 rounded-lg  text-[15px] hover:bg-[#5f6FFF] hover:text-white transition-all duration-300 text-gray-600 dark:text-gray-400 cursor-pointer">
           <b>Convenience:</b>
           <p>
             Access to a network of trusted healthcare professionals in your
@@ -68,7 +68,7 @@ const About = () => {
           </p>
         </div>
 
-        <div className="border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 rounded-lg  text-[15px] hover:bg-[#5f6FFF] hover:text-white transition-all duration-300 text-gray-600 cursor-pointer">
+        <div className="border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 rounded-lg  text-[15px] hover:bg-[#5f6FFF] hover:text-white transition-all duration-300 text-gray-600 dark:text-gray-400 cursor-pointer">
           <b>Personalization:</b>
           <p>
             Tailored recommendations and reminders to help you stay on top of

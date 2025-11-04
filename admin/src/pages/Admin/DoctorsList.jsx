@@ -108,7 +108,7 @@ const DoctorsList = () => {
             All Specialities
           </option>
           {[...new Set((doctors || []).map((doc) => doc.speciality))].map((speciality, index) => (
-            <option key={index} value={speciality} className="text-sm sm:text-base ">
+            <option key={index} value={speciality} className="text-sm sm:text-base dark:bg-gray-900 ">
               {speciality}
             </option>
           ))}
@@ -135,8 +135,8 @@ const DoctorsList = () => {
                   alt={item.name}
                 />
                 <div className="p-4">
-                  <p className="text-neutral-800 text-lg font-medium">{item.name}</p>
-                  <p className="text-zinc-600 text-sm">{item.speciality}</p>
+                  <p className="text-neutral-800 dark:text-neutral-200 text-lg font-medium">{item.name}</p>
+                  <p className="text-zinc-600 dark:text-zinc-400 text-sm">{item.speciality}</p>
                   <div className="mt-2 flex items-center gap-1 text-sm ">
                     <input
                       onChange={() => handleToggleAvailability(item._id)}
@@ -161,9 +161,9 @@ const DoctorsList = () => {
       {/* Modal for Confirmation */}
       {showModal && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-96 shadow-lg transform transition-all duration-300 ease-in-out scale-100 hover:scale-[1.02]">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">Confirm Deletion</h2>
-            <p className="text-gray-600 mb-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-96 shadow-lg transform transition-all duration-300 ease-in-out scale-100 hover:scale-[1.02]">
+            <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Confirm Deletion</h2>
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
               Are you sure you want to delete this doctor? This action cannot be undone.
             </p>
             <div className="flex justify-end gap-4">
