@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import AdminContextProvider from "./context/AdminContext.jsx"; 
 import DoctorContextProvider from "./context/DoctorContext.jsx"; 
 import AppContextProvider from "./context/AppContext.jsx"; 
+import { ThemeProvider } from "./context/ThemeContext.jsx";
 
 // Mount the React app to the root DOM node
 createRoot(document.getElementById("root")).render(
@@ -12,7 +13,9 @@ createRoot(document.getElementById("root")).render(
     <AdminContextProvider> {/* Provides admin context to the app */}
       <DoctorContextProvider> {/* Provides doctor context to the app */}
         <AppContextProvider> {/* Provides app-wide utilities context */}
-          <App /> {/* Main application component */}
+          <ThemeProvider>
+            <App /> {/* Main application component */}
+          </ThemeProvider>
         </AppContextProvider>
       </DoctorContextProvider>
     </AdminContextProvider>

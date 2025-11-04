@@ -12,6 +12,7 @@ import DoctorDashboard from "./pages/Doctor/DoctorDashboard";
 import DoctorAppointments from "./pages/Doctor/DoctorAppointments";
 import DoctorProfile from "./pages/Doctor/DoctorProfile";
 import UserList from "./pages/Admin/UserList";
+import MainNavbar from "./components/mainNavbar";
 
 import { AdminContext } from "./context/AdminContext";
 import { DoctorContext } from "./context/DoctorContext";
@@ -19,9 +20,10 @@ import { DoctorContext } from "./context/DoctorContext";
 const App = () => {
   const { aToken } = useContext(AdminContext);
   const { dToken } = useContext(DoctorContext);
+ 
 
   return aToken || dToken ? (
-    <div className="bg-[#F8F9FD]">
+    <div className="bg-[#F8F9FD] dark:bg-[#161c28]">
       {/* Toast notifications */}
       <ToastContainer
         autoClose={4000}
@@ -54,6 +56,7 @@ const App = () => {
     </div>
   ) : (
     <>
+      <MainNavbar />
       <Login />
       <ToastContainer
         autoClose={4000}

@@ -2,11 +2,40 @@
 
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
 
 ::-webkit-scrollbar{
     @apply hidden
 }
 
-*{
-    font-family: Outfit;
+
+* {
+  font-family: Outfit;
+}
+
+/* 🌈 Default Colors */
+:root {
+  --color-primary: #5f6fff;
+  --bg-color: #ffffff;
+  --text-color: #000000;
+}
+
+/* 🌙 Dark Mode Colors */
+.dark {
+  --color-primary: #5f6fff;
+  --bg-color: #0f172a;
+  --text-color: #ffffff;
+}
+
+/* 🌍 Global Styles */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 💬 Navbar, Footer, Chatbot, etc. */
+.navbar, .footer {
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
