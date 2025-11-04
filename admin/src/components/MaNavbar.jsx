@@ -3,7 +3,7 @@ import { Moon, Sun } from "lucide-react";
 import { ThemeContext } from "../context/ThemeContext";
 import { assets } from "../assets/assets";
 
-const MainNavbar = () => {
+const MaNavbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
@@ -18,13 +18,15 @@ const MainNavbar = () => {
       {/* Right Section */}
       <div className="flex items-center gap-3">
         {/* Optional Nav Items */}
-        <p className="hidden sm:block text-gray-700 dark:text-gray-300">Welcome</p>
+        <p className="hidden sm:block text-gray-700 dark:text-gray-300">
+          Welcome
+        </p>
 
         {/* Theme Toggle Button */}
         <button
           onClick={toggleTheme}
           className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 
-          hover:bg-gray-300 dark:hover:bg-gray-600 transition-all duration-300 hover:scale-110 shadow-sm"
+              hover:bg-gray-300 dark:hover:bg-gray-600 transition-all duration-300 hover:scale-110 shadow-sm"
           title="Toggle theme"
         >
           {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
@@ -34,4 +36,4 @@ const MainNavbar = () => {
   );
 };
 
-export default MainNavbar;
+export default MaNavbar;
