@@ -51,7 +51,7 @@ const Navbar = () => {
           </button>
           <button
             onClick={logoutHandler}
-            className="bg-[#5f6FFF] hover:opacity-75 cursor-pointer text-white text-sm px-10 py-2 rounded-full"
+            className="bg-[#5f6FFF] hover:opacity-75 cursor-pointer text-white text-sm px-3 sm:px-10 py-2 rounded-full"
           >
             Logout
             {sending && <span className="spinner-border spinner-border-sm">...</span>}

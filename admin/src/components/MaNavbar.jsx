@@ -18,7 +18,7 @@ const MaNavbar = () => {
       {/* Right Section */}
       <div className="flex items-center gap-3">
         {/* Optional Nav Items */}
-        <p className="hidden sm:block text-gray-700 dark:text-gray-300">
+        <p className="text-gray-700 dark:text-gray-300">
           Welcome
         </p>
 
