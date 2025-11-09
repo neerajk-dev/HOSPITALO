@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import { AppContext } from "../context/AppContext";
 
 const NearbyPharmacy = () => {
   const [location, setLocation] = useState(null);
   const [pharmacies, setPharmacies] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const { backendUrl } = useContext(AppContext);
 
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition(
@@ -30,7 +33,7 @@ const NearbyPharmacy = () => {
   setLoading(true);
   try {
     const res = await fetch(
-      `http://localhost:4000/api/pharmacy?lat=${location.latitude}&lon=${location.longitude}`
+      `${backendUrl}/api/pharmacy?lat=${location.latitude}&lon=${location.longitude}`
     );
     const data = await res.json();
     setPharmacies(data);
