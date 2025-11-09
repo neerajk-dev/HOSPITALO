@@ -72,7 +72,7 @@ const NearbyPharmacy = () => {
         <MapContainer
           center={[location.latitude, location.longitude]}
           zoom={14}
-          style={{ height: "400px", width: "100%", borderRadius: "12px" }}
+          style={{ height: "400px", width: "100%", borderRadius: "12px", zIndex: 10 }}
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           <Marker
