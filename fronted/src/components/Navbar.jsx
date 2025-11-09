@@ -79,13 +79,13 @@ const Navbar = () => {
               <div className="min-w-48 bg-gray-50 dark:bg-gray-800  rounded flex flex-col gap-4 p-4 shadow-md">
                 <p
                   onClick={() => navigate("/my-profile")}
-                  className="hover:text-black cursor-pointer"
+                  className="hover:text-black dark:hover:text-white cursor-pointer"
                 >
                   My Profile
                 </p>
                 <p
                   onClick={() => navigate("/my-appointments")}
-                  className="hover:text-black cursor-pointer"
+                  className="hover:text-black dark:hover:text-white cursor-pointer"
                 >
                   My Appointments
                 </p>

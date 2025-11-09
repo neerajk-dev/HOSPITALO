@@ -7,6 +7,7 @@ import adminRouter from './routes/adminRoute.js';
 import doctorRouter from './routes/doctorRoute.js';
 import userRouter from './routes/userRoute.js';
 import chatbotRoute from "./routes/chatbotRoute.js";
+import pharmacyRoutes from "./routes/pharmacyRoutes.js";
 
 
 
@@ -27,6 +28,7 @@ app.use('/api/admin',adminRouter)
 app.use('/api/doctor',doctorRouter)
 app.use('/api/user',userRouter)
 app.use("/api/ai", chatbotRoute);
+app.use("/api/pharmacy", pharmacyRoutes);
 
 
 app.get('/',(req, res)=> {

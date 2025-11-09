@@ -27,7 +27,7 @@ This backend powers the Hospitalo healthcare platform, providing secure APIs for
 - 💳 **Payments**: Razorpay integration for secure payments
 - 🛡️ **Admin Panel**: Manage doctors, appointments, and analytics
 - ☁️ **Image Upload**: Profile images via Multer & Cloudinary
-
+- 💊 **Nearby Pharmacy Locator**: Fetch nearby pharmacies using OpenStreetMap API
 ---
 
 ## 📁 Project Structure

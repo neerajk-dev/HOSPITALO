@@ -28,6 +28,7 @@ This documentation covers the Admin Panel, Backend API, and Frontend Panel, with
 | Razorpay     | ![Razorpay](https://img.shields.io/badge/Razorpay-02042B?logo=razorpay&logoColor=white&style=for-the-badge) |
 | Cloudinary   | ![Cloudinary](https://img.shields.io/badge/Cloudinary-3448C5?logo=cloudinary&logoColor=white&style=for-the-badge) |
 | DeepSeek API   | ![DeepSeek](https://img.shields.io/badge/DeepSeek-1E90FF?logo=deepl&amp;logoColor=white&amp;style=for-the-badge>) |
+| OpenStreetMap | ![OpenStreetMap](https://img.shields.io/badge/OpenStreetMap-7AB317?logo=openstreetmap&logoColor=white&style=for-the-badge) |
 
 ---
 
@@ -43,6 +44,8 @@ This documentation covers the Admin Panel, Backend API, and Frontend Panel, with
 - 🔔 **Notifications**: Real-time updates for confirmations, reminders, and more.
 - 👤 **Profile Management**: Update personal details and manage health information.
 - 🤖 **Chatbot Integration**: AI-powered chatbot for answering user queries and assisting with appointment booking.
+- 📍**Location Access**: Automatically detects the user’s current location using the browser’s Geolocation API.
+- 🏪 **Nearby Pharmacy Detection**: Displays a list of pharmacies within a few kilometers radius.
 
 ---
 

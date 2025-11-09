@@ -26,6 +26,7 @@ This is the user-facing web application for booking doctor appointments, managin
   Enjoy a seamless experience on desktop, tablet, and mobile devices.
 
 - 🤖 **Chatbot Integration**: AI-powered chatbot for answering user queries and assisting with appointment booking.
+- 💊 **Nearby Pharmacy Finder**: Locate the nearest pharmacies around your location using OpenStreetMap API — powered by backend /api/pharmacy/nearby endpoint.
 
 ---
 
@@ -38,6 +39,8 @@ This is the user-facing web application for booking doctor appointments, managin
 | TailwindCSS  | ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06B6D4?logo=tailwindcss&logoColor=white&style=for-the-badge) |
 | Axios        | ![Axios](https://img.shields.io/badge/Axios-5A29E4?logo=axios&logoColor=white&style=for-the-badge) |
 | React Router | ![React Router](https://img.shields.io/badge/React%20Router-CA4245?logo=react-router&logoColor=white&style=for-the-badge) |
+| DeepSeek API | ![DeepSeek API](https://img.shields.io/badge/DeepSeek-0EA5E9?logo=deepseek&logoColor=white&style=for-the-badge) |
+| OpenStreetMap | ![OpenStreetMap](https://img.shields.io/badge/OpenStreetMap-7AB317?logo=openstreetmap&logoColor=white&style=for-the-badge) |
 
 ---
 

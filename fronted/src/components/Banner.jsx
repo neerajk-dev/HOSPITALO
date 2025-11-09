@@ -1,5 +1,5 @@
 import { assets } from "../assets/assets"; // Image assets
-import { useNavigate } from "react-router-dom"; // For routing
+import { Link, useNavigate } from "react-router-dom"; // For routing
 
 const Banner = () => {
   const navigate = useNavigate();
@@ -12,7 +12,8 @@ const Banner = () => {
           <p>Book Appointment</p>
           <p className="mt-4">With 100+ Trusted Doctors</p>
         </div>
-        <button
+       <div className="">
+         <button
           onClick={() => {
             navigate("/login");
             scrollTo(0, 0);
@@ -21,6 +22,14 @@ const Banner = () => {
         >
           Create account
         </button>
+        <button className="bg-white ml-3 text-sm sm:text-base text-gray-600 px-3 py-3 rounded-full mt-6 hover:scale-105 transition-all">
+          <Link to="/nearby-pharmacy">
+            Find Nearby Pharmacy
+          </Link>
+        </button>
+       </div>
+        
+
       </div>
 
       {/* Right: Image */}

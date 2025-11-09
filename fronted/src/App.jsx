@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 import { ToastContainer } from 'react-toastify';
 import ResetPassword from './pages/ResetPassword';
 import PrivPolicy from './pages/PrivPolicy';
+import NearbyPharmacy from './components/NearbyPharmacy';
 
 
 const App = () => {
@@ -42,6 +43,7 @@ const App = () => {
       <Route path='/my-appointments' element={<MyAppointments />} />
       <Route path='/appointment/:docId' element={<Appointment />} />
       <Route path='/pri-policy' element={<PrivPolicy lastUpdated="November 4, 2025" />} />
+      <Route path="/nearby-pharmacy" element={<NearbyPharmacy />} />
     </Routes>
     <Footer/>
    </div>
