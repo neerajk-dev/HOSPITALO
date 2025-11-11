@@ -8,6 +8,7 @@ const NearbyPharmacy = () => {
   const [location, setLocation] = useState(null);
   const [pharmacies, setPharmacies] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [visibleCount, setVisibleCount] = useState(4);
 
   const { backendUrl } = useContext(AppContext);
 
@@ -30,20 +31,19 @@ const NearbyPharmacy = () => {
   }, [location]);
 
   const fetchNearbyPharmacies = async () => {
-  setLoading(true);
-  try {
-    const res = await fetch(
-      `${backendUrl}/api/pharmacy?lat=${location.latitude}&lon=${location.longitude}`
-    );
-    const data = await res.json();
-    setPharmacies(data);
-  } catch (err) {
-    console.error("Frontend Pharmacy Error:", err);
-  } finally {
-    setLoading(false);
-  }
-};
-
+    setLoading(true);
+    try {
+      const res = await fetch(
+        `${backendUrl}/api/pharmacy?lat=${location.latitude}&lon=${location.longitude}`
+      );
+      const data = await res.json();
+      setPharmacies(data);
+    } catch (err) {
+      console.error("Frontend Pharmacy Error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const userIcon = new L.Icon({
     iconUrl: "https://cdn-icons-png.flaticon.com/512/64/64113.png",
@@ -54,6 +54,11 @@ const NearbyPharmacy = () => {
     iconUrl: "https://cdn-icons-png.flaticon.com/512/2966/2966327.png",
     iconSize: [30, 30],
   });
+
+  // 👇 Function to handle "Show More" click
+  const handleShowMore = () => {
+    setVisibleCount((prev) => prev + 4); // show next 4
+  };
 
   return (
     <div className="p-6 space-y-6">
@@ -72,7 +77,12 @@ const NearbyPharmacy = () => {
         <MapContainer
           center={[location.latitude, location.longitude]}
           zoom={14}
-          style={{ height: "400px", width: "100%", borderRadius: "12px", zIndex: 10 }}
+          style={{
+            height: "400px",
+            width: "100%",
+            borderRadius: "12px",
+            zIndex: 10,
+          }}
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           <Marker
@@ -82,12 +92,8 @@ const NearbyPharmacy = () => {
             <Popup>You are here</Popup>
           </Marker>
 
-          {pharmacies.map((p, i) => (
-            <Marker
-              key={i}
-              position={[p.lat, p.lon]}
-              icon={pharmacyIcon}
-            >
+          {pharmacies.slice(0, visibleCount).map((p, i) => (
+            <Marker key={i} position={[p.lat, p.lon]} icon={pharmacyIcon}>
               <Popup>
                 <strong>{p.display_name.split(",")[0]}</strong>
                 <br />
@@ -108,7 +114,7 @@ const NearbyPharmacy = () => {
       {/* List View */}
       {pharmacies.length > 0 && (
         <div className="space-y-3">
-          {pharmacies.map((p, i) => (
+          {pharmacies.slice(0, visibleCount).map((p, i) => (
             <div
               key={i}
               className="border border-gray-200 shadow-md p-4 rounded-xl hover:shadow-lg transition-all"
@@ -129,6 +135,18 @@ const NearbyPharmacy = () => {
               </a>
             </div>
           ))}
+
+          {/* Show More Button */}
+          {visibleCount < pharmacies.length && (
+            <div className="text-center mt-4">
+              <button
+                onClick={handleShowMore}
+                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+              >
+                Show More
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>

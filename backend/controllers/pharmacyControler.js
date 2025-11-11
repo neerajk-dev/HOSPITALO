@@ -30,7 +30,7 @@ const nearbyPharmacyRouter = async (req, res) => {
       parseFloat(lat) - 0.05,
     ].join(",");
 
-    const url = `https://nominatim.openstreetmap.org/search?format=json&q=pharmacy&bounded=1&limit=30&viewbox=${viewbox}`;
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=medical&bounded=1&limit=30&viewbox=${viewbox}`;
 
     const response = await axios.get(url, {
       headers: {

@@ -160,6 +160,22 @@ fronted/    # Frontend Panel (React)
 
 ---
 
+
+# 💊 Nearby Pharmacy Locator
+
+A web-based application that helps users find nearby pharmacies instantly using integrated location tracking and OpenStreetMap API. Perfect for quickly locating pharmacies to purchase prescribed medicines after doctor consultations.
+
+## 🌟 Features
+
+- **📍 Location Access** - Detects user's current position via Geolocation API
+- **🏪 Nearby Pharmacy Detection** - Fetches and displays pharmacies within a few kilometers radius
+- **🗺️ Interactive Map View** - Visual pins displayed using OpenStreetMap + Leaflet.js
+- **🧭 Directions Support** - Direct Google Maps navigation link from each pharmacy pin
+- **📱 Responsive Design** - Works perfectly on desktop and mobile devices
+- **⚡ Dynamic Refresh** - Updates automatically when location changes
+
+---
+
 ## 🎨 UI Highlights
 
 - **Modern, responsive design** with TailwindCSS
