@@ -101,7 +101,7 @@ const Navbar = () => {
           </button>
         )}
 
-        <div className="hover:text-black text-gray-500 hover:bg-gray-100 hover:rounded-full cursor-pointer text-2xl hidden md:block" onClick={logout}>
+        <div className="hover:text-black text-gray-500 hover:bg-gray-200 dark:hover:bg-zinc-600 p-[2px] hover:rounded-full cursor-pointer text-2xl hidden md:block" onClick={logout}>
           <MdOutlineLogout />
         </div>
 

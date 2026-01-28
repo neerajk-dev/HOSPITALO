@@ -5,6 +5,7 @@ import { assets } from "../assets/assets";
 import RelatedDoctors from "../components/RelatedDoctors";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { Info } from 'lucide-react';
 
 const Appointment = () => {
   const { docId } = useParams();
@@ -162,7 +163,7 @@ const Appointment = () => {
 
           <div className="flex-1 border border-gray-400 rounded-lg p-8 py-7 bg-white dark:bg-gray-800 mx-2 sm:mx-0 mt-[-80px] sm:mt-0">
             {/* --------- Doc Info : name, degree, experience -------- */}
-            <p className="flex items-center gap-2 text-2xl font-medium to-gray-900">
+            <p className="flex items-center gap-1 text-2xl font-medium to-gray-900">
               {docInfo.name}
               <img className="w-5" src={assets.verified_icon} alt="" />
             </p>
@@ -178,7 +179,7 @@ const Appointment = () => {
             {/* -------- Doctor About -------- */}
             <div>
               <p className="flex items-center gap-1 text-sm font-medium text-gray-900 dark:text-gray-300 mt-3">
-                About <img src={assets.info_icon} alt="" />
+                About <Info  className="h-5 w-4" />
               </p>
               <p className="text-sm text-gray-500 dark:text-gray-400 max-w-[700px] mt-1">
                 {docInfo.about}
