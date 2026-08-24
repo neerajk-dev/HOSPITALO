@@ -7,8 +7,13 @@ import { toast } from "react-toastify";
 import axios from "axios";
 
 const AllApointments = () => {
-  const { aToken, appointments = [], getAllAppointments, cancelAppointment, backendUrl } =
-    useContext(AdminContext);
+  const {
+    aToken,
+    appointments = [],
+    getAllAppointments,
+    cancelAppointment,
+    backendUrl,
+  } = useContext(AdminContext);
   const { calculateAge, slotDateFormat, currency } = useContext(AppContext);
 
   const [showModal, setShowModal] = useState(false);
@@ -44,7 +49,7 @@ const AllApointments = () => {
       setLoading(true);
       const { data } = await axios.delete(
         `${backendUrl}/api/admin/delete-appointment/${appointmentId}`,
-        { headers: { aToken } }
+        { headers: { aToken } },
       );
       if (data.success) {
         toast.success("Appointment deleted successfully");
@@ -53,7 +58,9 @@ const AllApointments = () => {
         toast.error(data.message || "Failed to delete appointment");
       }
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to delete appointment");
+      toast.error(
+        error.response?.data?.message || "Failed to delete appointment",
+      );
     } finally {
       setLoading(false);
     }
@@ -96,17 +103,31 @@ const AllApointments = () => {
   });
 
   return (
-    <div className="w-full max-w-6xl m-5">
+    <div className="flex-1 overflow-x-hidden p-4 sm:p-6 lg:p-8 ml-20 md:ml-64 w-[calc(100%-5rem)] md:w-[calc(100%-16rem)]">
       <p className="mb-3 text-lg font-medium">All Appointments</p>
 
       {/* 🔍 Search Section */}
-      <div className="mb-4 m-2 flex flex-col sm:flex-row gap-4">
+      <div className="mb-6 flex flex-col md:flex-row gap-4">
         <input
           type="text"
           placeholder="Search by patient name or doctor name..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full sm:w-1/2 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#5f6FFF]"
+          className="
+w-full
+md:max-w-md
+rounded-xl
+border
+border-gray-300
+dark:border-gray-700
+bg-white
+dark:bg-gray-800
+px-4
+py-3
+focus:ring-2
+focus:ring-[#5f6FFF]
+outline-none
+"
         />
       </div>
 
@@ -116,9 +137,41 @@ const AllApointments = () => {
           <div className="animate-spin rounded-full h-11 w-11 border-3 border-[#5f6FFF] border-t-transparent"></div>
         </div>
       ) : (
-        <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-400 rounded text-sm max-h-[80vh] min-h-[60vh] overflow-y-scroll">
+        <div
+          className="
+bg-white
+dark:bg-gray-900
+border
+border-gray-200
+dark:border-gray-700
+rounded-2xl
+shadow-sm
+overflow-auto
+max-h-[75vh]
+"
+        >
           {/* Header */}
-          <div className="hidden sm:grid grid-cols-[0.5fr_3fr_1fr_3fr_3fr_1fr_1fr_1fr] py-3 px-6 border-b border-gray-200 dark:border-gray-400 gap-2 font-medium text-gray-700 dark:text-gray-300">
+          <div
+            className="
+hidden
+sm:grid
+sticky
+top-0
+z-20
+bg-white
+dark:bg-gray-900
+grid-cols-[0.5fr_3fr_1fr_3fr_3fr_1fr_1fr_1fr]
+py-3
+px-6
+border-b
+border-gray-200
+dark:border-gray-700
+gap-2
+font-medium
+text-gray-700
+dark:text-gray-300
+"
+          >
             <p>#</p>
             <p>Patient</p>
             <p>Age</p>
@@ -133,19 +186,28 @@ const AllApointments = () => {
           {filteredAppointments.length > 0 ? (
             filteredAppointments.map((item, index) => (
               <div
-                className="flex flex-wrap justify-between max-sm:gap-2 sm:grid sm:grid-cols-[0.5fr_3fr_1fr_3fr_3fr_1fr_1fr_1fr] items-center text-gray-500 dark:text-gray-400 py-3 px-6 border-b border-gray-200 dark:border-gray-400 hover:bg-gray-50 dark:hover:bg-gray-600"
+                className="flex flex-wrap justify-between max-sm:gap-2 sm:grid sm:grid-cols-[0.5fr_3fr_1fr_3fr_3fr_1fr_1fr_1fr] items-center text-gray-500 dark:text-gray-400 py-3 px-6 border-b border-gray-200 dark:border-gray-400 hover:bg-indigo-50
+dark:hover:bg-slate-800
+transition-all
+duration-200"
                 key={item._id || index}
               >
                 <p className="max-sm:hidden">{index + 1}</p>
 
                 {/* Patient */}
                 <div className="flex items-center gap-2">
-                  <img className="w-8 rounded-full" src={item.userData.image} alt="" />
+                  <img
+                    className="w-8 rounded-full"
+                    src={item.userData.image}
+                    alt=""
+                  />
                   <p>{item.userData.name}</p>
                 </div>
 
                 {/* Age */}
-                <p className="max-sm:hidden">{calculateAge(item.userData.dob)}</p>
+                <p className="max-sm:hidden">
+                  {calculateAge(item.userData.dob)}
+                </p>
 
                 {/* Date & Time */}
                 <p>
@@ -154,7 +216,11 @@ const AllApointments = () => {
 
                 {/* Doctor */}
                 <div className="flex items-center gap-2">
-                  <img className="w-8 rounded-full bg-gray-200" src={item.docData.image} alt="" />
+                  <img
+                    className="w-8 rounded-full bg-gray-200"
+                    src={item.docData.image}
+                    alt=""
+                  />
                   <p>{item.docData.name}</p>
                 </div>
 
@@ -168,11 +234,18 @@ const AllApointments = () => {
                 {item.cancelled ? (
                   <p className="text-red-400 text-xs font-medium">Cancelled</p>
                 ) : item.isCompleted ? (
-                  <p className="text-green-500 text-xs font-medium">Completed</p>
+                  <p className="text-green-500 text-xs font-medium">
+                    Completed
+                  </p>
                 ) : (
                   <img
                     onClick={() => handleCancelAppointment(item._id)}
-                    className="w-10 cursor-pointer"
+                    className="
+w-9
+cursor-pointer
+transition-transform
+hover:scale-110
+"
                     src={assets.cancel_icon}
                     alt="cancel"
                   />
@@ -180,7 +253,14 @@ const AllApointments = () => {
 
                 {/* Delete */}
                 <button
-                  className="group p-2 text-[1rem] text-red-500 transition-all active:scale-95"
+                  className="
+rounded-lg
+p-2
+text-red-500
+hover:bg-red-50
+dark:hover:bg-red-900/30
+transition-all
+"
                   onClick={() => openModal(item._id)}
                 >
                   <FaRegTrashAlt className="text-red-600 group-hover:scale-110 transition-transform" />
@@ -188,7 +268,9 @@ const AllApointments = () => {
               </div>
             ))
           ) : (
-            <p className="text-center py-10 text-gray-500">No appointments found.</p>
+            <p className="text-center py-10 text-gray-500">
+              No appointments found.
+            </p>
           )}
         </div>
       )}
@@ -197,9 +279,12 @@ const AllApointments = () => {
       {showModal && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 w-96 shadow-lg transform transition-all duration-300 ease-in-out scale-100 hover:scale-[1.02]">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">Confirm Deletion</h2>
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">
+              Confirm Deletion
+            </h2>
             <p className="text-gray-600 mb-6">
-              Are you sure you want to delete this appointment? This action cannot be undone.
+              Are you sure you want to delete this appointment? This action
+              cannot be undone.
             </p>
             <div className="flex justify-end gap-4">
               <button

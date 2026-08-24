@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://hospitalo-yjlj.onrender.com/sitemap.xml

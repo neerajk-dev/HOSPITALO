@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react"
+import { createContext, useState, useEffect, useCallback } from "react"
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -18,11 +18,12 @@ const AdminContextProvider = (props) => {
   const [patients, setPatients] = useState([]);
   const [appointments, setAppointments] = useState([]);
   const [dashData, setDashData] = useState(false);
+  const [aiDashboardData, setAiDashboardData] = useState(false);
 
  
 
   // getAllDoctors: Fetches all doctors from backend and updates state
-  const getAllDoctors = async () => {
+  const getAllDoctors = useCallback(async () => {
     try {
       const { data } = await axios.post(
         backendUrl + "/api/admin/all-doctors",
@@ -37,10 +38,10 @@ const AdminContextProvider = (props) => {
     } catch (error) {
       toast.error(error.message); 
     }
-  };
+  }, [backendUrl, aToken]);
 
  // getAllPatients: Fetches all patients from backend
- const getAllPatients = async () => {
+ const getAllPatients = useCallback(async () => {
   try {
     const { data } = await axios.get(backendUrl + "/api/admin/all-patients", {
       headers: { aToken },
@@ -53,12 +54,12 @@ const AdminContextProvider = (props) => {
   } catch (error) {
     toast.error(error.message); 
   }
-};
+}, [backendUrl, aToken]);
 
   
 
   // changeAvailability: Changes availability status of a doctor
-  const changeAvailability = async (docId) => {
+  const changeAvailability = useCallback(async (docId) => {
     try {
       const { data } = await axios.post(
         backendUrl + "/api/admin/change-availability",
@@ -74,10 +75,10 @@ const AdminContextProvider = (props) => {
     } catch (error) {
       toast.error(error.message);
     }
-  };
+  }, [backendUrl, aToken, getAllDoctors]);
 
   // getAllAppointments: Fetches all appointments from backend and updates state
-  const getAllAppointments = async () => {
+  const getAllAppointments = useCallback(async () => {
     try {
       
       const { data } = await axios.get(backendUrl + "/api/admin/appointments", {
@@ -91,10 +92,10 @@ const AdminContextProvider = (props) => {
     } catch (error) {
       toast.error(error.message); 
     }
-  };
+  }, [backendUrl, aToken]);
 
   // cancelAppointment: Cancels an appointment by ID
-  const cancelAppointment = async (appointmentId) => {
+  const cancelAppointment = useCallback(async (appointmentId) => {
     try {
      
       const { data } = await axios.post(
@@ -111,10 +112,10 @@ const AdminContextProvider = (props) => {
     } catch (error) {
       toast.error(error.message);
     }
-  };
+  }, [backendUrl, aToken, getAllAppointments]);
 
   // getDashData: Fetches dashboard data for admin
-  const getDashData = async () => {
+  const getDashData = useCallback(async () => {
     try {
      
       const { data } = await axios.get(backendUrl + "/api/admin/dashboard", {
@@ -128,7 +129,35 @@ const AdminContextProvider = (props) => {
     } catch (error) {
       toast.error(error.message); 
     }
-  };
+  }, [backendUrl, aToken]);
+
+  const getAiDashboardData = useCallback(async () => {
+    try {
+      const { data } = await axios.get(backendUrl + "/api/ai/admin-history", {
+        headers: { atoken: aToken },
+      });
+      if (data.success) {
+        const records = data.data || [];
+        const diseaseCount = records.reduce((acc, item) => {
+          item.predictions?.forEach((prediction) => {
+            const disease = prediction.disease;
+            acc[disease] = (acc[disease] || 0) + 1;
+          });
+          return acc;
+        }, {});
+
+        const mostPredictedDisease = Object.entries(diseaseCount).sort((a, b) => b[1] - a[1])[0]?.[0] || 'None';
+
+        setAiDashboardData({
+          totalPredictions: records.length,
+          mostPredictedDisease,
+          history: records.slice(0, 8)
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }, [backendUrl, aToken]);
 
   // add interceptor to auto-clear admin token on 401
 useEffect(() => {
@@ -163,7 +192,9 @@ useEffect(() => {
     dashData,
     getDashData,
     patients,
-    getAllPatients
+    getAllPatients,
+    aiDashboardData,
+    getAiDashboardData
   };
 
  

@@ -4,8 +4,8 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import appointmentModel from "../models/appointmentModel.js";
 import sendWithBrevo from '../utils/sendWithBrevo.js'
-import userModel from "../models/userModel.js";
 import { CANCELLATION_TEMPLATE_DOCTOR, CONFIRMATION_TEMPLATE_DOCTOR } from "../config/emailTemplates.js";
+import userModel from "../models/userModel.js";
 
 
 
@@ -161,30 +161,155 @@ const appointmentCancel = async (req, res) => {
 
 // ✅ Doctor Dashboard Summary
 const doctorDashboard = async (req, res) => {
-    try {
-        const { docId } = req.body;
-        const appointments = await appointmentModel.find({ docId });
+  try {
+    const { docId } = req.body;
 
-        let earnings = 0;
-        let patients = [];
+    // Sirf required fields fetch karo
+    const appointments = await appointmentModel.find({ docId }).lean();
 
-        appointments.forEach(item => {
-            if (item.isCompleted || item.payment) earnings += item.amount;
-            if (!patients.includes(item.userId)) patients.push(item.userId);
-        });
+    const now = new Date();
 
-        const dashData = {
-            earnings,
-            appointments: appointments.length,
-            patients: patients.length,
-            latestAppointments: appointments.reverse().slice(0, 5)
-        };
+    const startToday = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate()
+    ).getTime();
 
-        res.json({ success: true, dashData });
-    } catch (error) {
-        console.log(error);
-        res.json({ success: false, message: error.message });
+    const endToday = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate(),
+      23,
+      59,
+      59,
+      999
+    ).getTime();
+
+    let earnings = 0;
+    let todayAppointments = 0;
+    let upcomingAppointments = 0;
+    let completedToday = 0;
+    let pendingPatients = 0;
+
+    const patientIds = new Set();
+    const notifications = [];
+
+    // Sirf ek hi loop
+    for (const item of appointments) {
+      patientIds.add(item.userId);
+
+      if (item.payment && !item.cancelled) {
+        earnings += Number(item.amount);
+      }
+
+      if (
+        item.date >= startToday &&
+        item.date <= endToday &&
+        !item.cancelled
+      ) {
+        todayAppointments++;
+      }
+
+      if (
+        item.date >= startToday &&
+        !item.cancelled &&
+        !item.isCompleted
+      ) {
+        upcomingAppointments++;
+      }
+
+      if (
+        item.date >= startToday &&
+        item.date <= endToday &&
+        item.isCompleted
+      ) {
+        completedToday++;
+      }
+
+      if (!item.cancelled && !item.isCompleted) {
+        pendingPatients++;
+      }
     }
+
+    // Latest 6 appointments
+    const latestAppointments = appointments
+      .sort((a, b) => b.date - a.date)
+      .slice(0, 6);
+
+    // Ek hi query me users lao
+    const userIds = latestAppointments.map((a) => a.userId);
+
+    const users = await userModel
+      .find({ _id: { $in: userIds } })
+      .select("-password")
+      .lean();
+
+    const userMap = {};
+
+    users.forEach((user) => {
+      userMap[user._id.toString()] = user;
+    });
+
+    const recentPatients = latestAppointments.map((item) => ({
+      ...(userMap[item.userId] || {}),
+      date: item.date,
+    }));
+
+    latestAppointments.forEach((item) => {
+      notifications.push({
+        title: item.cancelled
+          ? "Appointment Cancelled"
+          : item.isCompleted
+          ? "Appointment Completed"
+          : "Appointment Booked",
+
+        message: item.userData?.name || "Patient",
+
+        time: item.slotDate,
+      });
+    });
+
+    const dashData = {
+      earnings,
+      appointments: appointments.length,
+      patients: patientIds.size,
+
+      todayAppointments,
+
+      upcomingAppointments,
+
+      completedToday,
+
+      pendingPatients,
+
+      latestAppointments,
+
+      todaySchedule: latestAppointments.filter(
+        (item) =>
+          item.date >= startToday &&
+          item.date <= endToday &&
+          !item.cancelled
+      ),
+
+      recentPatients,
+
+      notifications,
+    };
+
+
+    res.json({
+      success: true,
+      dashData,
+    });
+
+  } catch (error) {
+    console.log(error);
+
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 // ✅ Get doctor profile

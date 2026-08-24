@@ -69,7 +69,7 @@ const DoctorAppointments = () => {
   const list = (appointment || []).slice().reverse();
 
   return (
-    <div className="w-full max-w-6xl m-5">
+    <div className="flex-1 overflow-x-hidden p-4 sm:p-6 lg:p-8 ml-20 md:ml-64 w-[calc(100%-5rem)] md:w-[calc(100%-16rem)]">
       <p className="mb-3 text-lg font-medium">All Appointments</p>
 
       <div className="bg-white dark:bg-[#0f172a] border border-gray-200 dark:border-gray-400 rounded text-sm max-h-[80vh] min-h-[50vh] overflow-y-scroll">

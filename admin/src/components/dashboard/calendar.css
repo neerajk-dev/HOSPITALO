@@ -1,0 +1,112 @@
+/* Main Calendar */
+
+.hospital-calendar {
+  width: 100%;
+  border: none;
+  border-radius: 20px;
+  background: transparent;
+  font-family: inherit;
+  padding: 10px;
+}
+
+/* Navigation */
+
+.hospital-calendar .react-calendar__navigation {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.hospital-calendar .react-calendar__navigation button {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  border-radius: 10px;
+  transition: .25s;
+}
+
+.dark .hospital-calendar .react-calendar__navigation button {
+  color: white;
+}
+
+.hospital-calendar .react-calendar__navigation button:hover {
+  background: #eef2ff;
+}
+
+/* Weekdays */
+
+.hospital-calendar .react-calendar__month-view__weekdays {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  margin-bottom: 10px;
+}
+
+.dark .hospital-calendar .react-calendar__month-view__weekdays {
+  color: #94a3b8;
+}
+
+/* Dates */
+
+.hospital-calendar .react-calendar__tile {
+  height: 42px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: .2s;
+}
+
+.hospital-calendar .react-calendar__tile:hover {
+  background: #eef2ff;
+}
+
+.dark .hospital-calendar .react-calendar__tile:hover {
+  background: #334155;
+}
+
+/* Today */
+
+.hospital-calendar .react-calendar__tile--now {
+  background: #dbeafe !important;
+  color: #2563eb !important;
+}
+
+/* Selected */
+
+.hospital-calendar .react-calendar__tile--active {
+  background: #5f6fff !important;
+  color: white !important;
+}
+
+/* Weekend */
+
+.hospital-calendar .react-calendar__month-view__days__day--weekend {
+  color: #ef4444;
+}
+
+/* Remove default border */
+
+.hospital-calendar abbr {
+  text-decoration: none;
+}
+
+/* Mobile */
+
+@media (max-width: 640px) {
+
+  .hospital-calendar {
+    padding: 0;
+  }
+
+  .hospital-calendar .react-calendar__tile {
+    height: 34px;
+    font-size: 13px;
+  }
+
+  .hospital-calendar .react-calendar__navigation button {
+    font-size: 16px;
+  }
+
+}

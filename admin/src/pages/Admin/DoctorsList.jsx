@@ -87,7 +87,7 @@ const DoctorsList = () => {
   });
 
   return (
-    <div className="m-5 max-h-[90vh] overflow-y-scroll">
+    <div className="flex-1 overflow-x-hidden p-4 sm:p-6 lg:p-8 ml-20 md:ml-64 w-[calc(100%-5rem)] md:w-[calc(100%-16rem)]">
       <h1 className="text-lg font-medium">All Doctors</h1>
 
       {/* Search and Filter Section */}

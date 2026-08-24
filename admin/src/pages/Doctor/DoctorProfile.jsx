@@ -91,15 +91,15 @@ const DoctorProfile = () => {
   return (
     profileData && (
       <div>
-        <div className="flex flex-col gap-4 m-5">
-          <div>
+        <div className="flex-1 overflow-x-hidden p-4 sm:p-6 lg:p-8 ml-20 md:ml-64 w-[calc(100%-5rem)] md:w-[calc(100%-16rem)]">
+          <div className="flex flex-col lg:flex-row gap-6">
             <img
               className="bg-[#5f6FFF]/80 w-full sm:max-w-64 rounded-lg"
               src={safeProfile.image}
               alt=""
             />
           </div>
-          <div className="flex-1 border border-stone-100 rounded-lg p-8 py-7 bg-white dark:bg-gray-900">
+          <div className="flex-1 border border-stone-100 rounded-lg mt-2 p-8 py-7 bg-white dark:bg-gray-900">
             <p className="flex items-center gap-2 text-3xl font-medium text-gray-700 dark:text-gray-200">
               {safeProfile.name}
             </p>

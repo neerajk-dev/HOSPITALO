@@ -13,6 +13,7 @@ import DoctorAppointments from "./pages/Doctor/DoctorAppointments";
 import DoctorProfile from "./pages/Doctor/DoctorProfile";
 import UserList from "./pages/Admin/UserList";
 import MaNavbar from "./components/MaNavbar";
+import DoctorDiagnosis from "./pages/DoctorDiagnosis";
 
 import { AdminContext } from "./context/AdminContext";
 import { DoctorContext } from "./context/DoctorContext";
@@ -36,8 +37,9 @@ const App = () => {
         theme="light"
       />
       <Navbar />
-      <div className="flex items-start">
+      <div className="flex">
         <Sidebar />
+        <div className="flex-1 overflow-hidden">
         <Routes>
           {/* Admin Routes */}
           <Route path="/" element={<></>} />
@@ -45,13 +47,15 @@ const App = () => {
           <Route path="/all-appointments" element={<AllApointments />} />
           <Route path="/add-doctor" element={<AddDoctor />} />
           <Route path="/doctor-list" element={<DoctorsList />} />
-          <Route path="/user-list" element={<UserList />} />
+          <Route path="/patient-list" element={<UserList />} />
 
           {/* Doctor Routes */}
           <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
           <Route path="/doctor-appointments" element={<DoctorAppointments />} />
+          <Route path="/doctor-diagnosis" element={<DoctorDiagnosis />} />
           <Route path="/doctor-profile" element={<DoctorProfile />} />
         </Routes>
+      </div>
       </div>
     </div>
   ) : (

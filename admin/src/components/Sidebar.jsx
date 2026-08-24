@@ -1,118 +1,141 @@
 import React, { useContext } from "react";
 import { AdminContext } from "../context/AdminContext";
-import { NavLink } from "react-router-dom";
-import { assets } from "../assets/assets";
 import { DoctorContext } from "../context/DoctorContext";
-import { ClipboardClock, House, ClipboardPlus, Users } from 'lucide-react';
+import { NavLink } from "react-router-dom";
+import {
+  House,
+  ClipboardClock,
+  ClipboardPlus,
+  Users,
+} from "lucide-react";
 
-// Sidebar component for displaying navigation links based on user role (Admin/Doctor)
 const Sidebar = () => {
-  // Get admin token from AdminContext
   const { aToken } = useContext(AdminContext);
-  // Get doctor token from DoctorContext
   const { dToken } = useContext(DoctorContext);
 
+  const activeClass =
+    "bg-indigo-50 dark:bg-slate-700 border-r-4 border-indigo-600 text-indigo-600";
+
+  const normalClass =
+    "hover:bg-gray-100 dark:hover:bg-slate-800 transition-all duration-200";
+
   return (
-    <div className="min-h-screen  bg-white dark:bg-[#0f172a] border-r border-gray-200 dark:border-gray-500">
+    <aside
+      className="
+      fixed
+      top-[72px]
+      left-0
+      z-40
+      h-[calc(100vh-72px)]
+      w-18
+      md:w-64
+      overflow-y-auto
+      bg-white
+      dark:bg-[#0f172a]
+      border-r
+      border-gray-200
+      dark:border-slate-700
+      shadow-sm
+    "
+    >
+      <div className="hidden md:block px-6 pt-6 pb-3">
+        <h2 className="text-xs uppercase tracking-widest text-gray-400">
+          MENU
+        </h2>
+      </div>
+
       {aToken && (
-        <ul className="text-[#515151] dark:text-gray-400 mt-5">
-          {/* Admin Dashboard link */}
+        <ul className="space-y-2 px-3">
+
           <NavLink
+            to="/admin-dashboard"
             className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-72 cursor-pointer ${
-                isActive ? "bg-[#F2F3FF] dark:bg-gray-700 border-r-4 border-[#5f6FFF]" : ""
-              }`
+              `flex items-center gap-4 rounded-xl px-4 py-3 ${isActive ? activeClass : normalClass}`
             }
-            to={"/admin-dashboard"}
           >
-            <House className="text-zinc-900 dark:text-zinc-300"/>
-            <p className="hidden md:block">Dashboard</p>
+            <House size={20} />
+            <span className="hidden md:block font-medium">Dashboard</span>
           </NavLink>
 
-          {/* Admin Appointments link */}
           <NavLink
+            to="/all-appointments"
             className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-72 cursor-pointer ${
-                isActive ? "bg-[#F2F3FF] dark:bg-gray-700 border-r-4 border-[#5f6FFF]" : ""
-              }`
+              `flex items-center gap-4 rounded-xl px-4 py-3 ${isActive ? activeClass : normalClass}`
             }
-            to={"/all-appointments"}
           >
-            {/* <img className="" src={assets.appointment_icon} alt="" /> */}
-            <ClipboardClock className="text-zinc-900 dark:text-zinc-300"/>
-            <p className="hidden md:block">Appointments</p>
+            <ClipboardClock size={20} />
+            <span className="hidden md:block font-medium">Appointments</span>
           </NavLink>
 
-          {/* Add Doctor link */}
           <NavLink
+            to="/add-doctor"
             className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-72 cursor-pointer ${
-                isActive ? "bg-[#F2F3FF] dark:bg-gray-700 border-r-4 border-[#5f6FFF]" : ""
-              }`
+              `flex items-center gap-4 rounded-xl px-4 py-3 ${isActive ? activeClass : normalClass}`
             }
-            to={"/add-doctor"}
           >
-            <ClipboardPlus className="text-zinc-900 dark:text-zinc-300"/>
-            <p className="hidden md:block">Add Doctor</p>
+            <ClipboardPlus size={20} />
+            <span className="hidden md:block font-medium">Add Doctor</span>
           </NavLink>
 
-          {/* Doctors List link */}
           <NavLink
+            to="/doctor-list"
             className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-72 cursor-pointer ${
-                isActive ? "bg-[#F2F3FF] dark:bg-gray-700 border-r-4 border-[#5f6FFF]" : ""
-              }`
+              `flex items-center gap-4 rounded-xl px-4 py-3 ${isActive ? activeClass : normalClass}`
             }
-            to={"/doctor-list"}
           >
-            <Users className="text-zinc-900 dark:text-zinc-300"/>
-            <p className="hidden md:block">Doctors List</p>
+            <Users size={20} />
+            <span className="hidden md:block font-medium">Doctors List</span>
           </NavLink>
+
         </ul>
       )}
+
       {dToken && (
-        <ul className="text-[#515151] dark:text-gray-400 mt-5">
-          {/* Doctor Dashboard link */}
+        <ul className="space-y-2 px-3">
+
           <NavLink
+            to="/doctor-dashboard"
             className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-72 cursor-pointer ${
-                isActive ? "bg-[#F2F3FF] dark:bg-gray-700 border-r-4 border-[#5f6FFF]" : ""
-              }`
+              `flex items-center gap-4 rounded-xl px-4 py-3 ${isActive ? activeClass : normalClass}`
             }
-            to={"/doctor-dashboard"}
           >
-            <House className="text-zinc-900 dark:text-zinc-300"/>
-            <p className="hidden md:block">Dashboard</p>
+            <House size={20} />
+            <span className="hidden md:block font-medium">Dashboard</span>
           </NavLink>
 
-          {/* Doctor Appointments link */}
           <NavLink
+            to="/doctor-appointments"
             className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-72 cursor-pointer ${
-                isActive ? "bg-[#F2F3FF] dark:bg-gray-700 border-r-4 border-[#5f6FFF]" : ""
-              }`
+              `flex items-center gap-4 rounded-xl px-4 py-3 ${isActive ? activeClass : normalClass}`
             }
-            to={"/doctor-appointments"}
           >
-            <ClipboardClock className="text-zinc-900 dark:text-zinc-300"/>
-            <p className="hidden md:block">Appointments</p>
+            <ClipboardClock size={20} />
+            <span className="hidden md:block font-medium">Appointments</span>
           </NavLink>
 
-          {/* Doctor Profile link */}
           <NavLink
+            to="/doctor-diagnosis"
             className={({ isActive }) =>
-              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-72 cursor-pointer ${
-                isActive ? "bg-[#F2F3FF] dark:bg-gray-700 border-r-4 border-[#5f6FFF]" : ""
-              }`
+              `flex items-center gap-4 rounded-xl px-4 py-3 ${isActive ? activeClass : normalClass}`
             }
-            to={"/doctor-profile"}
           >
-            <Users className="text-zinc-900 dark:text-zinc-300"/>
-            <p className="hidden md:block">Profile</p>
+            <ClipboardPlus size={20} />
+            <span className="hidden md:block font-medium">AI Diagnosis</span>
           </NavLink>
+
+          <NavLink
+            to="/doctor-profile"
+            className={({ isActive }) =>
+              `flex items-center gap-4 rounded-xl px-4 py-3 ${isActive ? activeClass : normalClass}`
+            }
+          >
+            <Users size={20} />
+            <span className="hidden md:block font-medium">Profile</span>
+          </NavLink>
+
         </ul>
       )}
-    </div>
+    </aside>
   );
 };
 

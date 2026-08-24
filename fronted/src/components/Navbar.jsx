@@ -39,8 +39,8 @@ const Navbar = () => {
 
       {/* ✅ Desktop Navigation */}
       <ul className="md:flex items-start gap-5 font-medium hidden">
-        {["/", "/doctors", "/about", "/contact"].map((path, i) => {
-          const labels = ["HOME", "ALL DOCTORS", "ABOUT", "CONTACT"];
+        {['/', '/doctors', '/ai-diagnosis', '/about', '/contact'].map((path, i) => {
+          const labels = ['HOME', 'ALL DOCTORS', 'AI DIAGNOSIS', 'ABOUT', 'CONTACT'];
           return (
             <NavLink
               key={path}
@@ -121,8 +121,8 @@ const Navbar = () => {
 
           {/* ✅ Mobile Nav Links */}
           <ul className="flex flex-col items-center gap-3 mt-5 px-5 text-lg font-medium">
-            {["/", "/doctors", "/about", "/contact"].map((path, i) => {
-              const labels = ["HOME", "ALL DOCTORS", "ABOUT", "CONTACT"];
+            {['/', '/doctors', '/ai-diagnosis', '/about', '/contact'].map((path, i) => {
+              const labels = ['HOME', 'ALL DOCTORS', 'AI DIAGNOSIS', 'ABOUT', 'CONTACT'];
               return (
                 <NavLink
                   key={path}

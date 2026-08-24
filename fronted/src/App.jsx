@@ -14,6 +14,7 @@ import { ToastContainer } from 'react-toastify';
 import ResetPassword from './pages/ResetPassword';
 import PrivPolicy from './pages/PrivPolicy';
 import NearbyPharmacy from './components/NearbyPharmacy';
+import AIDiagnosis from './pages/AIDiagnosis';
 
 
 const App = () => {
@@ -44,6 +45,8 @@ const App = () => {
       <Route path='/appointment/:docId' element={<Appointment />} />
       <Route path='/pri-policy' element={<PrivPolicy lastUpdated="November 4, 2025" />} />
       <Route path="/nearby-pharmacy" element={<NearbyPharmacy />} />
+      <Route path="/symptom-checker" element={<AIDiagnosis />} />
+      <Route path="/ai-diagnosis" element={<AIDiagnosis />} />
     </Routes>
     <Footer/>
    </div>

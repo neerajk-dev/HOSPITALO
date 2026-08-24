@@ -70,7 +70,7 @@ const AddDoctor = () => {
   };
 
   return (
-    <form onSubmit={onSubmitHandler} className="m-5 w-full">
+    <form onSubmit={onSubmitHandler} className="flex-1 overflow-x-hidden p-4 sm:p-6 lg:p-8 ml-20 md:ml-64 w-[calc(100%-5rem)] md:w-[calc(100%-16rem)]">
       <p className="mb-3 text-lg font-medium">Add Doctor</p>
 
       <div className="bg-white dark:bg-gray-900 px-8 py-8 border border-gray-300 dark:border-gray-400 rounded w-full max-w-4xl max-h-[80vh] overflow-y-scroll">

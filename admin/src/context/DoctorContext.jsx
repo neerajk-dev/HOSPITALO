@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { createContext } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -16,7 +16,7 @@ const DoctorContextProvider = (props) => {
   const [profileData, setProfileData] = useState(false);
 
   // Fetch all appointments
-  const getAppointment = async () => {
+  const getAppointment = useCallback(async () => {
     try {
       const { data } = await axios.get(
         backendUrl + "/api/doctor/appointments",
@@ -24,18 +24,16 @@ const DoctorContextProvider = (props) => {
       );
       if (data.success) {
         setAppointment(data.appointments);
-        console.log(data.appointments);
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error);
       toast.error(error.message);
     }
-  };
+  }, [backendUrl, dToken]);
 
   // Mark appointment as completed
-  const completeAppointment = async (appointmentId) => {
+  const completeAppointment = useCallback(async (appointmentId) => {
     try {
       const { data } = await axios.post(
         backendUrl + "/api/doctor/complete-appointment",
@@ -49,13 +47,12 @@ const DoctorContextProvider = (props) => {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error);
       toast.error(error.message);
     }
-  };
+  }, [backendUrl, dToken, getAppointment]);
 
   // Cancel appointment
-  const cancelAppointment = async (appointmentId) => {
+  const cancelAppointment = useCallback(async (appointmentId) => {
     try {
       const { data } = await axios.post(
         backendUrl + "/api/doctor/cancel-appointment",
@@ -69,13 +66,12 @@ const DoctorContextProvider = (props) => {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error);
       toast.error(error.message);
     }
-  };
+  }, [backendUrl, dToken, getAppointment]);
 
   // Fetch dashboard data
-  const getDashData = async () => {
+  const getDashData = useCallback(async () => {
     try {
       const { data } = await axios.get(
         backendUrl + "/api/doctor/dashboard",
@@ -83,18 +79,16 @@ const DoctorContextProvider = (props) => {
       );
       if (data.success) {
         setDashData(data.dashData);
-        console.log(data.dashData);
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error);
       toast.error(error.message);
     }
-  };
+  }, [backendUrl, dToken]);
 
   // Fetch profile data
-  const getProfileData = async () => {
+  const getProfileData = useCallback(async () => {
     try {
       const { data } = await axios.get(
         backendUrl + "/api/doctor/profile",
@@ -102,15 +96,13 @@ const DoctorContextProvider = (props) => {
       );
       if (data.success) {
         setProfileData(data.profileData);
-        console.log(data.profileData);
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error);
       toast.error(error.message);
     }
-  };
+  }, [backendUrl, dToken]);
 
   // add interceptor to auto-clear doctor token on 401
   useEffect(() => {

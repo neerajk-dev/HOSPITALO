@@ -21,7 +21,7 @@ const Contact = () => {
           <p className="font-semibold text-lg text-gray-600 dark:text-gray-200">Our OFFICE</p>
 
           <p className="text-gray-500 dark:text-gray-400">
-            44 Chhapra Station <br /> 841301, Chapra, INDIA
+            44 Chapra Station <br /> 841301, Chapra, INDIA
           </p>
 
           <p className="text-gray-500 dark:text-gray-400">

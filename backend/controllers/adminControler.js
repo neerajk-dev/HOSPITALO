@@ -1,5 +1,6 @@
 import validator from "validator"
 import bcrypt from 'bcrypt'
+import mongoose from 'mongoose'
 import { v2 as cloudinary } from "cloudinary"
 import doctorModel from "../models/doctorModel.js"
 import jwt from 'jsonwebtoken'
@@ -205,32 +206,153 @@ const appointmentCancel = async (req, res) => {
     }
 }
 
-// API  to get dashboard data for admin panel
-const adminDashboard = async (req, res)=> {
-
+// API to get dashboard data for admin panel
+const adminDashboard = async (req, res) => {
     try {
 
-        const doctors = await doctorModel.find({})
-        const users = await userModel.find({})
-        const appointments = await appointmentModel.find({})
+        const today = new Date().toISOString().slice(0, 10);
+        const [doctors, users, appointments] = await Promise.all([
+            doctorModel.find({}).select('-password'),
+            userModel.find({}).select('-password'),
+            appointmentModel.find({}).sort({ date: -1 })
+        ]);
+
+        const completedAppointments = appointments.filter((item) => item.isCompleted);
+        const pendingAppointments = appointments.filter((item) => !item.cancelled && !item.isCompleted);
+        const cancelledAppointments = appointments.filter((item) => item.cancelled);
+        const todayAppointments = appointments.filter((item) => item.slotDate === today);
+        const paidAppointments = appointments.filter((item) => item.payment || item.isCompleted);
+        const revenue = paidAppointments.reduce((sum, item) => sum + (Number(item.amount) || 0), 0);
+
+        const appointmentsPerMonth = await appointmentModel.aggregate([
+            { $match: { date: { $exists: true } } },
+            {
+                $group: {
+                    _id: {
+                        month: { $dateToString: { format: "%Y-%m", date: { $toDate: "$date" } } }
+                    },
+                    count: { $sum: 1 }
+                }
+            },
+            { $sort: { _id: 1 } }
+        ]);
+
+        const patientsRegisteredPerMonth = await userModel.aggregate([
+            { $match: { date: { $exists: true } } },
+            {
+                $group: {
+                    _id: {
+                        month: { $dateToString: { format: "%Y-%m", date: { $toDate: "$date" } } }
+                    },
+                    count: { $sum: 1 }
+                }
+            },
+            { $sort: { _id: 1 } }
+        ]);
+
+        const revenuePerMonth = await appointmentModel.aggregate([
+            { $match: { $or: [{ payment: true }, { isCompleted: true }] } },
+            {
+                $group: {
+                    _id: {
+                        month: { $dateToString: { format: "%Y-%m", date: { $toDate: "$date" } } }
+                    },
+                    total: { $sum: { $toDouble: "$amount" } }
+                }
+            },
+            { $sort: { _id: 1 } }
+        ]);
+
+        const doctorPerformance = await appointmentModel.aggregate([
+            { $group: {
+                _id: "$docId",
+                appointments: { $sum: 1 },
+                completed: { $sum: { $cond: [{ $eq: ["$isCompleted", true] }, 1, 0] } },
+                cancelled: { $sum: { $cond: [{ $eq: ["$cancelled", true] }, 1, 0] } },
+                revenue: { $sum: { $cond: [{ $or: [{ $eq: ["$payment", true] }, { $eq: ["$isCompleted", true] }] }, { $toDouble: "$amount" }, 0] } }
+            } },
+            { $sort: { appointments: -1 } },
+            { $limit: 6 }
+        ]);
+
+        const doctorPerformanceWithNames = await Promise.all(
+            doctorPerformance.map(async (item) => {
+                const doctor = await doctorModel.findById(item._id).select('name speciality');
+                return {
+                    _id: item._id,
+                    name: doctor?.name || 'Unknown Doctor',
+                    speciality: doctor?.speciality || 'General',
+                    appointments: item.appointments,
+                    completed: item.completed,
+                    cancelled: item.cancelled,
+                    revenue: item.revenue,
+                };
+            })
+        );
+
+        const departmentDistribution = await doctorModel.aggregate([
+            { $group: { _id: "$speciality", count: { $sum: 1 } } },
+            { $sort: { count: -1 } }
+        ]);
+
+        const recentPatients = await userModel.find({}).sort({ date: -1, _id: -1 }).limit(6).select('-password');
+        const recentDoctors = await doctorModel.find({}).sort({ date: -1, _id: -1 }).limit(6).select('-password');
+
+        const systemStatus = {
+            database: mongoose.connection.readyState === 1 ? 'Operational' : 'Offline',
+            backendApi: 'Operational',
+            mailService: process.env.BREVO_API_KEY ? 'Operational' : 'Unavailable',
+            paymentGateway: process.env.RAZORPAY_KEY_ID && process.env.RAZORPAY_KEY_SECRET ? 'Operational' : 'Unavailable',
+            authentication: process.env.JWT_SECRET ? 'Operational' : 'Unavailable'
+        };
+
+        const notifications = [];
+        appointments.slice(0, 6).forEach((item) => {
+            if (item.cancelled) {
+                notifications.push({ type: 'cancelled', title: 'Appointment Cancelled', message: `${item.userData?.name || 'Patient'} cancelled their booking`, time: item.slotDate });
+            } else if (item.payment) {
+                notifications.push({ type: 'payment', title: 'Payment Completed', message: `${item.userData?.name || 'Patient'} paid for the consultation`, time: item.slotDate });
+            } else if (item.isCompleted) {
+                notifications.push({ type: 'completed', title: 'Appointment Completed', message: `${item.docData?.name || 'Doctor'} completed a visit`, time: item.slotDate });
+            } else {
+                notifications.push({ type: 'booked', title: 'Appointment Booked', message: `${item.userData?.name || 'Patient'} booked with ${item.docData?.name || 'doctor'}`, time: item.slotDate });
+            }
+        });
 
         const dashData = {
             doctors: doctors.length,
             appointments: appointments.length,
             patients: users.length,
-            latestAppointments: appointments.reverse().slice(0,5)
-        }
+            todayAppointments: todayAppointments.length,
+            completedAppointments: completedAppointments.length,
+            pendingAppointments: pendingAppointments.length,
+            cancelledAppointments: cancelledAppointments.length,
+            revenue,
+            latestAppointments: appointments.slice(0, 8).map((item) => ({
+                ...item.toObject(),
+                patientName: item.userData?.name || 'Patient',
+                doctorName: item.docData?.name || 'Doctor',
+                department: item.docData?.speciality || 'General'
+            })),
+            recentPatients,
+            recentDoctors,
+            analytics: {
+                appointmentsPerMonth,
+                patientsRegisteredPerMonth,
+                revenuePerMonth,
+                doctorPerformance: doctorPerformanceWithNames,
+                departmentDistribution
+            },
+            systemStatus,
+            notifications
+        };
 
-        res.json({success:true,dashData})
-
-        
+        res.json({ success: true, dashData });
     } catch (error) {
-        console.log(error)
-        res.json({ success: false, message: error.message })
+        console.log(error);
+        res.json({ success: false, message: error.message });
     }
-
-
-}
+};
 
 // API to delete an appointment
 const deleteAppointment = async (req, res) => {
