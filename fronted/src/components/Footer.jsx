@@ -1,12 +1,11 @@
 import React, { useContext, useState } from "react";
-import { assets } from "../assets/assets"; // Image assets
-import { useNavigate } from "react-router-dom"; // For routing
+import { assets } from "../assets/assets";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { AppContext } from "../context/AppContext";
 
 const Footer = () => {
-  const navigate = useNavigate();
   const { backendUrl, token } = useContext(AppContext);
 
   const [showFeedback, setShowFeedback] = useState(false);
@@ -17,26 +16,40 @@ const Footer = () => {
 
   const submitFeedback = async (e) => {
     e?.preventDefault();
-    if (!fbMessage.trim()) return toast.warn("Please enter a message");
+
+    if (!fbMessage.trim()) {
+      return toast.warn("Please enter a message");
+    }
 
     try {
       setSending(true);
 
-      const payload = { message: fbMessage };
-      // agar user login nahi hai to naam/email bhej do agar diye gaye ho
+      const payload = {
+        message: fbMessage,
+      };
+
+      // If the user is not logged in, send name/email if provided
       if (!token) {
         if (fbName.trim()) payload.name = fbName.trim();
         if (fbEmail.trim()) payload.email = fbEmail.trim();
       }
 
       const config = token ? { headers: { token } } : {};
-      const { data } = await axios.post(`${backendUrl}/api/user/send-feedback`, payload, config);
+
+      const { data } = await axios.post(
+        `${backendUrl}/api/user/send-feedback`,
+        payload,
+        config
+      );
 
       if (data?.success) {
         toast.success(data.message || "Feedback submitted");
-        // OTP example ki tarah email store karna chahe to:
-        if (!token && fbEmail) localStorage.setItem("fb_email", fbEmail);
-        // reset form
+
+        if (!token && fbEmail) {
+          localStorage.setItem("fb_email", fbEmail);
+        }
+
+        // Reset form
         setFbMessage("");
         setFbName("");
         setFbEmail("");
@@ -45,43 +58,107 @@ const Footer = () => {
         toast.error(data?.message || "Failed to submit feedback");
       }
     } catch (err) {
-      toast.error(err?.response?.data?.message || err?.message || "Error sending feedback");
+      toast.error(
+        err?.response?.data?.message ||
+          err?.message ||
+          "Error sending feedback"
+      );
     } finally {
       setSending(false);
     }
   };
 
   return (
-    <div className="md:mx-10">
+    <footer className="md:mx-10">
       <div className="flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-40 text-sm">
+
         {/* Left: Logo and Description */}
         <div>
-          <img className="mb-5 w-40" src={assets.logon} alt="logo" />
+          <img
+            className="mb-5 w-40"
+            src={assets.logon}
+            alt="Hospitalo logo"
+          />
+
           <p className="w-full md:w-2/3 text-gray-600 dark:text-gray-400 leading-6">
-            Hospitalo is your trusted platform for managing prescriptions and healthcare needs online.
+            Hospitalo is a smart healthcare platform for online doctor
+            appointments, hospital management and convenient healthcare
+            services for patients.
           </p>
         </div>
 
         {/* Center: Navigation Links */}
         <div>
-          <p className="text-xl font-medium dark:text-gray-200 mb-5">COMPANY</p>
-          <ul className="flex flex-col gap-2 text-gray-600 dark:text-gray-400">
-            <li className="cursor-pointer" onClick={() => { navigate("/"); scrollTo(0,0); }}>Home</li>
-            <li className="cursor-pointer" onClick={() => { navigate("/about"); scrollTo(0,0); }}>About us</li>
-            <li className="cursor-pointer" onClick={() => { navigate("/contact"); scrollTo(0,0); }}>Contact us</li>
-            <li className="cursor-pointer" onClick={() => { navigate("/pri-policy"); scrollTo(0,0); }}>Privacy policy</li>
-          </ul>
+          <h2 className="text-xl font-medium dark:text-gray-200 mb-5">
+            COMPANY
+          </h2>
+
+          <nav aria-label="Footer navigation">
+            <ul className="flex flex-col gap-2 text-gray-600 dark:text-gray-400">
+              <li>
+                <Link
+                  to="/"
+                  onClick={() => scrollTo(0, 0)}
+                  className="hover:text-[#5f6FFF] transition-colors"
+                >
+                  Home
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  to="/about"
+                  onClick={() => scrollTo(0, 0)}
+                  className="hover:text-[#5f6FFF] transition-colors"
+                >
+                  About Us
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  to="/contact"
+                  onClick={() => scrollTo(0, 0)}
+                  className="hover:text-[#5f6FFF] transition-colors"
+                >
+                  Contact Us
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  to="/pri-policy"
+                  onClick={() => scrollTo(0, 0)}
+                  className="hover:text-[#5f6FFF] transition-colors"
+                >
+                  Privacy Policy
+                </Link>
+              </li>
+            </ul>
+          </nav>
         </div>
 
         {/* Right: Contact + Feedback */}
         <div>
-          <p className="text-xl font-medium dark:text-gray-200 mb-5">GET IN TOUCH</p>
+          <h2 className="text-xl font-medium dark:text-gray-200 mb-5">
+            GET IN TOUCH
+          </h2>
+
           <ul className="flex flex-col gap-2 text-gray-600 dark:text-gray-400 mb-4">
             <li>+7277959834</li>
-            <li><a className="underline" href="mailto:neerajkr145518@gmail.com">neerajkr145518@gmail.com</a></li>
+
+            <li>
+              <a
+                className="underline hover:text-[#5f6FFF] transition-colors"
+                href="mailto:neerajkr145518@gmail.com"
+              >
+                neerajkr145518@gmail.com
+              </a>
+            </li>
           </ul>
 
           <button
+            type="button"
             onClick={() => setShowFeedback((s) => !s)}
             className="bg-[#5f6FFF] text-white px-4 py-2 rounded-md"
           >
@@ -89,7 +166,10 @@ const Footer = () => {
           </button>
 
           {showFeedback && (
-            <form onSubmit={submitFeedback} className="mt-4 p-3 bg-white dark:bg-[#4a4c52]/50 backdrop-blur-lg border rounded shadow-sm text-sm">
+            <form
+              onSubmit={submitFeedback}
+              className="mt-4 p-3 bg-white dark:bg-[#4a4c52]/50 backdrop-blur-lg border rounded shadow-sm text-sm"
+            >
               {!token && (
                 <>
                   <input
@@ -99,6 +179,7 @@ const Footer = () => {
                     value={fbName}
                     onChange={(e) => setFbName(e.target.value)}
                   />
+
                   <input
                     className="w-full mb-2 p-2 border rounded"
                     type="email"
@@ -108,14 +189,16 @@ const Footer = () => {
                   />
                 </>
               )}
+
               <textarea
-                className="w-full mb-2 p-2 border rounded dark:bg-[#0f172a]/50  backdrop-blur-lg"
+                className="w-full mb-2 p-2 border rounded dark:bg-[#0f172a]/50 backdrop-blur-lg"
                 rows="4"
                 placeholder="Write your feedback..."
                 value={fbMessage}
                 onChange={(e) => setFbMessage(e.target.value)}
                 required
               />
+
               <div className="flex items-center gap-2">
                 <button
                   type="submit"
@@ -124,9 +207,10 @@ const Footer = () => {
                 >
                   {sending ? "Sending..." : "Submit"}
                 </button>
+
                 <button
                   type="button"
-                  onClick={() => { setShowFeedback(false); }}
+                  onClick={() => setShowFeedback(false)}
                   className="px-3 py-2 border rounded"
                 >
                   Cancel
@@ -140,11 +224,12 @@ const Footer = () => {
       {/* Copyright */}
       <div>
         <hr />
+
         <p className="py-5 text-sm text-center">
           Copyright © 2025 Hospitalo - All Rights Reserved.
         </p>
       </div>
-    </div>
+    </footer>
   );
 };
 
