@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
 
+Disallow: /login
+Disallow: /my-profile
+Disallow: /my-appointments
+Disallow: /appointment/
+
 Sitemap: https://hospitalo-yjlj.onrender.com/sitemap.xml
