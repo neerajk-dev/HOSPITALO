@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-        <loc>https://hospitalo-yjlj.onrender.com/</loc>
-    </url>
+
+  <url>
+    <loc>https://hospitalo-yjlj.onrender.com/</loc>
+  </url>
+
+  <url>
+    <loc>https://hospitalo-yjlj.onrender.com/doctors</loc>
+  </url>
+
+  <url>
+    <loc>https://hospitalo-yjlj.onrender.com/about</loc>
+  </url>
+
+  <url>
+    <loc>https://hospitalo-yjlj.onrender.com/contact</loc>
+  </url>
+
+  <url>
+    <loc>https://hospitalo-yjlj.onrender.com/ai-diagnosis</loc>
+  </url>
+
+  <url>
+    <loc>https://hospitalo-yjlj.onrender.com/nearby-pharmacy</loc>
+  </url>
+
+  <url>
+    <loc>https://hospitalo-yjlj.onrender.com/pri-policy</loc>
+  </url>
+
 </urlset>
